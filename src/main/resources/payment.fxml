@@ -1,0 +1,1260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" maxHeight="1570.0" maxWidth="2550.0" minHeight="1570.0" minWidth="2550.0" prefHeight="1570.0" prefWidth="2550.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Apache.invoicer.InvoiceController">
+    <children>
+        <VBox maxWidth="2550.0" minWidth="2550.0" prefHeight="250.0" prefWidth="2550.0" style="-fx-border-color: black; -fx-border-width: 5;">
+            <children>
+            <ImageView fitHeight="90.0" fitWidth="1334.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@title.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="712.0" />
+               </VBox.margin>
+            </ImageView>
+                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="2470.0" minWidth="2550.0" prefWidth="2550.0" text="3005 BROOKPARK ROAD" textAlignment="CENTER">
+                    <font>
+                        <Font name="Monospaced Regular" size="36.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Label>
+                <Label alignment="CENTER" layoutX="10.0" layoutY="79.0" maxWidth="2470.0" minWidth="2550.0" prefWidth="2550.0" text="PARMA, OHIO 44134" textAlignment="CENTER">
+                    <font>
+                        <Font name="Monospaced Regular" size="36.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Label>
+                <Label alignment="CENTER" layoutX="10.0" layoutY="99.0" maxWidth="2550.0" minWidth="2550.0" prefWidth="2550.0" text="PHONE # (216) 741-5100" textAlignment="CENTER">
+                    <font>
+                        <Font name="Monospaced Regular" size="36.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Label>
+                <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="2550.0" minWidth="2550.0" prefWidth="2550.0" text="THANK YOU FOR YOUR BUSINESS" textAlignment="CENTER">
+                    <font>
+                        <Font name="Monospaced Bold Italic" size="48.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </Label>
+            </children>
+        </VBox>
+        <ImageView fitHeight="270.0" layoutX="80.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="border-color: black;">
+            <image>
+                <Image url="@logo1.png" />
+            </image>
+        </ImageView>
+        <VBox layoutX="100.0" layoutY="320.0" prefHeight="200.0" prefWidth="1100.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <children>
+                <Label fx:id="customerNameLabel" text="COUNTY CAR CREDIT">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="customerAddressLabel" layoutX="12.0" layoutY="12.0" text="1100 BROOKPARK ROAD">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="customerAddress2Label" layoutX="12.0" layoutY="52.0" text="CLEVELAND, OH 44109">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+            </children>
+        </VBox>
+        <VBox layoutX="1350.0" layoutY="320.0" maxHeight="200.0" maxWidth="1100.0" minHeight="200.0" minWidth="1100.0" prefHeight="200.0" prefWidth="1100.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <children>
+                <Label text="PARTS FOR:">
+                    <font>
+                        <Font name="Monospaced Bold Italic" size="42.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="vehicleDescriptionLabel" layoutX="12.0" layoutY="12.0" maxWidth="1100.0" minWidth="1100.0" prefWidth="1100.0" text="2011 FORD E150 SUPER DUTY 6.7L V8 VIN:2">
+                    <font>
+                        <Font name="Monospaced Regular" size="36.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+            <Label fx:id="shipToLabel" layoutX="12.0" layoutY="81.0" maxWidth="1100.0" minWidth="1100.0" prefWidth="1100.0" text="GINO C/CO COUNTY CAR">
+               <font>
+                  <Font name="Monospaced Regular" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            </children>
+        </VBox>
+        <AnchorPane layoutX="40.0" layoutY="510.0" maxHeight="900.0" maxWidth="2470.0" minHeight="900.0" minWidth="2470.0" prefHeight="900.0" prefWidth="2470.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <children>
+                <GridPane gridLinesVisible="true" layoutX="2.0" maxWidth="2467.0" minWidth="2467.0" prefWidth="2467.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.0" minWidth="10.0" prefWidth="269.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.0" minWidth="0.0" prefWidth="247.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1043.0" minWidth="10.0" prefWidth="335.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1261.0" minWidth="10.0" prefWidth="287.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1258.0" minWidth="10.0" prefWidth="534.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1023.0" minWidth="10.0" prefWidth="186.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="859.0" minWidth="10.0" prefWidth="586.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="36.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label alignment="CENTER" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="INVOICE NO.">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="CUSTOMER NO." GridPane.columnIndex="1">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="279.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="DATE" GridPane.columnIndex="2">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="643.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="CUST P.O. NO." GridPane.columnIndex="4">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="889.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="CNTR NO." GridPane.columnIndex="5">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="1254.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="TERMS" GridPane.columnIndex="6">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label fx:id="invoiceNumberLabel" alignment="CENTER" prefWidth="1000.0" text="D300699" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="customerNumberLabel" alignment="CENTER" layoutX="10.0" layoutY="56.0" prefWidth="1000.0" text="350" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="dateLabel" alignment="CENTER" layoutX="242.0" layoutY="56.0" prefWidth="1000.0" text="06/14/21" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="poLabel" alignment="CENTER" layoutX="527.0" layoutY="56.0" prefWidth="1000.0" text="P122522" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="counterPersonLabel" alignment="CENTER" layoutX="881.0" layoutY="56.0" prefWidth="1000.0" text="3" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="termsLabel" alignment="CENTER" layoutX="1254.0" layoutY="56.0" prefWidth="1000.0" text="RETURN-CREDIT CARD" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="550.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="TIME" GridPane.columnIndex="3">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label fx:id="timeLabel" alignment="CENTER" layoutX="550.0" layoutY="56.0" prefWidth="1000.0" text="09:06 AM" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="48.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </GridPane>
+                <GridPane gridLinesVisible="true" layoutX="2.0" layoutY="100.0" maxHeight="800.0" maxWidth="2467.0" minHeight="800.0" minWidth="2467.0" prefHeight="800.0" prefWidth="2467.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="560.0" minWidth="0.0" prefWidth="467.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1043.0" minWidth="10.0" prefWidth="681.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1261.0" minWidth="6.0" prefWidth="190.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1258.0" minWidth="10.0" prefWidth="276.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1026.0" minWidth="10.0" prefWidth="276.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1275.0" minWidth="10.0" prefWidth="251.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="859.0" minWidth="10.0" prefWidth="251.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="859.0" minWidth="0.0" prefWidth="74.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="855.0" minHeight="0.0" prefHeight="743.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="276.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label alignment="CENTER" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="MFG-PART NUMBER">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="DESCRIPTION" GridPane.columnIndex="1">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="279.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" text="QUANTITY" GridPane.columnIndex="2">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="643.0" layoutY="11.0" maxWidth="275.0" minWidth="275.0" prefWidth="275.0" style="-fx-background-color: #e4e4e4;" text="LIST" GridPane.columnIndex="3">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="889.0" layoutY="11.0" maxWidth="275.0" minWidth="275.0" prefWidth="275.0" style="-fx-background-color: #e4e4e4;" text="UNIT" GridPane.columnIndex="4">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="1182.0" layoutY="11.0" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #e4e4e4;" text="CORE" GridPane.columnIndex="5">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="2118.0" layoutY="11.0" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #e4e4e4;" text="EXTENDED" GridPane.columnIndex="6">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <VBox fx:id="mfgPartNumberBox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                            <children>
+                                <Label prefWidth="1000.0" text="RTR 777444">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="620.0" prefWidth="1000.0" text="RTR 777444">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="descriptionBox" layoutX="10.0" layoutY="52.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <Label prefWidth="1000.0" text="ROTOR">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="254.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="ROTOR">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="quantityBox" layoutX="523.0" layoutY="52.0" maxWidth="169.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefWidth="1000.0" text="1">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="listBox" layoutX="1119.0" layoutY="52.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefWidth="1000.0" text="1000.222">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="254.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="1000.222">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="unitBox" layoutX="1385.0" layoutY="52.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefWidth="1000.0" text="1022.000">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="254.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="1022.000">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="coreBox" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                            <children>
+                                <Label alignment="CENTER_RIGHT" prefWidth="1000.0" text="1022.00">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="254.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="taxBox" maxWidth="80.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                            <children>
+                                <Label alignment="CENTER" prefWidth="1000.0" text="T">
+                                    <font>
+                                        <Font name="Monospaced Bold" size="47.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="254.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="T">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                            </children>
+                        </VBox>
+                  <Label alignment="CENTER" layoutX="2291.0" layoutY="11.0" prefWidth="1000.0" style="-fx-background-color: #e4e4e4;" GridPane.columnIndex="7">
+                     <font>
+                        <Font name="Monospaced Regular" size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <VBox fx:id="extendedBox" layoutX="1942.0" layoutY="61.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="71.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="132.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="193.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="254.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="315.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="376.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="437.0" prefWidth="1000.0" text="1022.00">
+                           <font>
+                              <Font name="Monospaced Bold" size="47.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+                    </children>
+                </GridPane>
+            </children>
+        </AnchorPane>
+        <GridPane gridLinesVisible="true" layoutX="1466.0" layoutY="1420.0" maxWidth="1044.0" minWidth="1044.0" prefHeight="120.0" prefWidth="1044.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1485.0" minWidth="0.0" prefWidth="251.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1513.0" minWidth="10.0" prefWidth="247.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1513.0" minWidth="10.0" prefWidth="251.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1513.0" minWidth="10.0" prefWidth="291.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="39.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label alignment="CENTER" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #e4e4e4;" text="SUB TOTAL" GridPane.columnIndex="1">
+                    <font>
+                        <Font name="Monospaced Regular" size="32.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Label alignment="CENTER" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #e4e4e4;" text="SALES TAX" GridPane.columnIndex="2">
+                    <font>
+                        <Font name="Monospaced Regular" size="32.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="" alignment="CENTER" maxWidth="290.0" minWidth="290.0" prefWidth="290.0" style="-fx-background-color: #e4e4e4;" text="TOTAL" GridPane.columnIndex="3">
+                    <font>
+                        <Font name="Monospaced Regular" size="32.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="totalLabel" alignment="CENTER_RIGHT" prefWidth="1000.0" text="CONTINUED" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="salesTaxLabel" alignment="CENTER_RIGHT" layoutX="2036.0" layoutY="81.0" prefWidth="1000.0" text="1500.23" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="subTotalLabel" alignment="CENTER_RIGHT" layoutX="1678.0" layoutY="71.0" prefWidth="1000.0" text="1500.23" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+            <Label alignment="CENTER" layoutX="206.0" layoutY="12.0" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #e4e4e4;" text="FREIGHT">
+               <font>
+                  <Font name="Monospaced Regular" size="32.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <Label fx:id="freightTotalLabel" alignment="CENTER_RIGHT" layoutX="514.0" layoutY="56.0" prefWidth="1000.0" text="2.50" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Monospaced Bold" size="48.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            </children>
+        </GridPane>
+        <GridPane layoutX="40.0" layoutY="1420.0" maxHeight="120.0" maxWidth="400.0" minHeight="120.0" minWidth="400.0" prefHeight="120.0" prefWidth="400.0" style="-fx-border-color: black; -fx-background-color: #e4e4e4; -fx-border-width: 2;">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="209.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="87.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="176.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="93.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label alignment="CENTER" prefWidth="1000.0" text="RECEIVED">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                            <padding>
+                                <Insets top="25.0" />
+                            </padding>
+                        </Label>
+                        <Label alignment="CENTER" prefWidth="1000.0" text="BY">
+                            <font>
+                                <Font name="Monospaced Regular" size="32.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <ImageView fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                    <image>
+                        <Image url="@black_x.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </GridPane>
+        <VBox layoutX="2460.0" layoutY="305.0" prefHeight="150.0" prefWidth="70.0">
+            <children>
+                <Label fx:id="pageNumberLabel" text="1">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Label layoutX="10.0" layoutY="10.0" text="OF">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Label fx:id="pageCountLabel" layoutX="10.0" layoutY="60.0" text="1">
+                    <font>
+                        <Font name="Monospaced Bold" size="48.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+            </children>
+        </VBox>
+      <ImageView fitHeight="270.0" layoutX="2285.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" style="border-color: black;">
+         <image>
+            <Image url="@logo2.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="1024" prefWidth="1280" style="-fx-background-color: #686868;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Apache.workstation.vehicleselector.VehicleSelectorController">
+   <children>
+      <VBox fx:id="yearBox" layoutX="20.0" layoutY="20.0" maxHeight="984.0" maxWidth="176.0" minHeight="984.0" minWidth="176.0" prefHeight="984.0" prefWidth="176.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label alignment="CENTER" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="12.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="109.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="176.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="109.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="176.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="243.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="310.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="377.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="444.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="511.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="578.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="645.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="12.0" layoutY="846.0" prefWidth="200.0" text="2022">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="yearLabel" alignment="CENTER" layoutX="38.0" layoutY="5.0" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" style="-fx-background-color: black;" text="YEAR" textFill="WHITE">
+         <font>
+            <Font name="Monospaced Bold" size="42.0" />
+         </font>
+      </Label>
+      <VBox fx:id="makeBox" layoutX="216.0" layoutY="20.0" maxHeight="580.0" maxWidth="500.0" minHeight="580.0" minWidth="500.0" prefHeight="580.0" prefWidth="500.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label layoutX="12.0" layoutY="12.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="109.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="109.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="109.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="176.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="243.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="444.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="makeLabel" alignment="CENTER" layoutX="356.0" layoutY="5.0" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" style="-fx-background-color: black;" text="MAKE" textFill="WHITE">
+         <font>
+            <Font name="Monospaced Bold" size="42.0" />
+         </font>
+      </Label>
+      <VBox fx:id="modelBox" layoutX="736.0" layoutY="20.0" maxHeight="580.0" maxWidth="524.0" minHeight="580.0" minWidth="524.0" prefHeight="580.0" prefWidth="524.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label layoutX="12.0" layoutY="12.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="109.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="176.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="109.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="176.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="243.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="444.0" prefWidth="500.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="modelLabel" alignment="CENTER" layoutX="888.0" layoutY="5.0" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" style="-fx-background-color: black;" text="MODEL" textFill="WHITE">
+         <font>
+            <Font name="Monospaced Bold" size="42.0" />
+         </font>
+      </Label>
+      <VBox fx:id="engineBox" layoutX="216.0" layoutY="650.0" maxHeight="354.0" maxWidth="1044.0" minHeight="354.0" minWidth="1044.0" prefHeight="354.0" prefWidth="1044.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Label prefWidth="1200.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label layoutX="12.0" layoutY="12.0" prefWidth="1200.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="115.0" prefWidth="1200.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </Label>
+            <Label layoutX="12.0" layoutY="188.0" prefWidth="1200.0" text="ACURA">
+               <font>
+                  <Font name="Monospaced Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="engineLabel" alignment="CENTER" layoutX="598.0" layoutY="635.0" maxWidth="280.0" minWidth="280.0" prefWidth="280.0" style="-fx-background-color: black;" text="ENGINE" textFill="WHITE">
+         <font>
+            <Font name="Monospaced Bold" size="42.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lockField" onKeyPressed="#readKey" opacity="0.0" />
+   </children>
+</AnchorPane>

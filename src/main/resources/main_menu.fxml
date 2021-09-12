@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024" prefWidth="1280" style="-fx-background-color: #686868;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Apache.MainMenuController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="7.0" layoutY="15.0" prefHeight="190.0" prefWidth="1266.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-color: white;">
+               <children>
+                  <Label text="WELCOME TO">
+                     <font>
+                        <Font name="System Bold" size="39.0" />
+                     </font>
+                  </Label>
+                  <Label text="EPICOR FREE">
+                     <font>
+                        <Font name="System Italic" size="31.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="200.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@title.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <ImageView fitHeight="175.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo1.png" />
+               </image></ImageView>
+            <VBox layoutX="7.0" layoutY="225.0" prefHeight="775.0" prefWidth="1266.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-color: white;">
+               <children>
+                  <Label id="option1" fx:id="option1" prefWidth="1230.0" text="POINT OF SALE">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" top="20.0" />
+                     </padding>
+                     <font>
+                        <Font name="Monospaced Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Label id="option2" fx:id="option2" layoutX="25.0" layoutY="25.0" prefWidth="1230.0" text="INVOICES">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" top="20.0" />
+                     </padding>
+                     <font>
+                        <Font name="Monospaced Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="option3" fx:id="option3" layoutX="25.0" layoutY="101.0" prefWidth="1230.0" text="APPLY PAYMENTS">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" top="20.0" />
+                     </padding>
+                     <font>
+                        <Font name="Monospaced Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="option4" fx:id="option4" layoutX="15.0" layoutY="167.0" prefWidth="1230.0" text="MANAGE INVENTORY">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" top="20.0" />
+                     </padding>
+                     <font>
+                        <Font name="Monospaced Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="option5" fx:id="option5" layoutX="15.0" layoutY="208.0" prefWidth="1230.0" text="CUSTOMER INFO">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" top="20.0" />
+                     </padding>
+                     <font>
+                        <Font name="Monospaced Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <ImageView fitHeight="175.0" fitWidth="200.0" layoutX="1120.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

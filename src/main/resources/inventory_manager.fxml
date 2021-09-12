@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="1024.0" maxWidth="1280.0" minHeight="1024.0" minWidth="1280.0" prefHeight="1024.0" prefWidth="1280.0" style="-fx-background-color: #686868;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Apache.workstation.inventory.InventoryManagerController">
+   <children>
+      <AnchorPane layoutX="20.0" layoutY="20.0" maxWidth="1240.0" minWidth="1240.0" prefHeight="800.0" prefWidth="1240.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 10;">
+         <children>
+            <GridPane layoutX="40.0" layoutY="40.0" prefHeight="140.0" prefWidth="500.0" style="-fx-border-color: black; -fx-background-color: white; -fx-border-width: 5;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="213.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="247.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="19.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="61.0" minHeight="0.0" prefHeight="17.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="LINE CODE:">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="PART NUMBER:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="lineCodeField" onKeyPressed="#lineCodeFieldKeyPressed" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </opaqueInsets>
+                  </TextField>
+                  <TextField fx:id="partNumberField" layoutX="210.0" layoutY="13.0" onKeyPressed="#partNumberFieldKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </opaqueInsets>
+                  </TextField>
+               </children>
+            </GridPane>
+            <GridPane layoutX="40.0" layoutY="200.0" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 5;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="389.0" minWidth="10.0" prefWidth="271.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="229.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="117.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Available       :" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="19.0" text="Stock Qty       :" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="19.0" text="Cost            :" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="availableLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="stockQuantityLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="287.0" layoutY="19.0" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="costLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="287.0" layoutY="86.0" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="descriptionLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="287.0" layoutY="110.0" prefHeight="50.0" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Monospaced Regular" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="142.0" text="Description     :" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="233.0" text="Line Code       :">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="39.0" text="Part Number     :" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lineLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="399.0" layoutY="233.0" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="partNumberLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="399.0" layoutY="36.0" prefWidth="200.0" text="0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane layoutX="20.0" layoutY="650.0" prefHeight="175.0" prefWidth="1200.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 5;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="614.0" minWidth="0.0" prefWidth="401.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="919.0" minWidth="10.0" prefWidth="422.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="919.0" minWidth="10.0" prefWidth="366.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="919.0" minWidth="0.0" prefWidth="0.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="97.0" minHeight="5.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="92.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="&lt;F3&gt; - Part Ledger" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="2.0" text="&lt;F5&gt; - Inventory Recount" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="36.0" text="&lt;F6&gt; - Change Cost" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="407.0" layoutY="2.0" text="&lt;F7&gt; - Change Stock Qty" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="407.0" layoutY="59.0" text="&lt;F8&gt; - Register New Parts" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="796.0" layoutY="9.0" text="&lt;F12&gt; - Exit" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="132.0" text="&lt;F4&gt; - Change Description" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="13.0" text="&lt;F9&gt; - Delete Part" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Monospaced Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </GridPane>
+            <AnchorPane fx:id="partRegTool" layoutX="200.0" layoutY="100.0" opacity="0.0" prefHeight="700.0" prefWidth="840.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label layoutX="220.0" style="-fx-background-color: black;" text="Part Registration Tool" textFill="WHITE">
+                     <font>
+                        <Font name="Monospaced Bold" size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <GridPane layoutX="40.0" layoutY="50.0" prefHeight="400.0" prefWidth="760.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="185.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="639.0" minWidth="10.0" prefWidth="575.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Line Code     :">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="31.0" text="Description   :" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="98.0" text="Part Number   :" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="165.0" text="Available Qty :" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="232.0" text="Stock Qty     :" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="299.0" text="Cost          :" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="partRegLineField" maxWidth="450.0" onKeyPressed="#partRegLineFieldKeyPressed" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="partRegDescriptionField" layoutX="195.0" layoutY="24.0" maxWidth="450.0" onKeyPressed="#partRegDescriptionFieldKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="partRegPartNumberField" layoutX="195.0" layoutY="91.0" maxWidth="450.0" onKeyPressed="#partRegPartNumberFieldKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="partRegAvailField" layoutX="195.0" layoutY="158.0" maxWidth="450.0" onKeyPressed="#partRegAvailFieldKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="partRegStockField" layoutX="195.0" layoutY="225.0" maxWidth="450.0" onKeyPressed="#partRegStockFieldKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="partRegCostField" layoutX="195.0" layoutY="292.0" maxWidth="450.0" onKeyPressed="#partRegCostFieldKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Monospaced Regular" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </GridPane>
+                  <Label layoutX="40.0" layoutY="625.0" text="&lt;F5&gt; - Register Part">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="640.0" layoutY="625.0" text="&lt;F12&gt; - Exit">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="partRegMessageLabel" layoutX="225.0" layoutY="500.0" textFill="RED">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="descriptionRequestBox" layoutX="270.0" layoutY="220.0" opacity="0.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label layoutX="30.0" layoutY="70.0" text="New Description:">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="descriptionRequestField" layoutX="30.0" layoutY="120.0" onKeyPressed="#descriptionRequestFieldKeyPressed" prefWidth="600.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="recountRequestBox" layoutX="270.0" layoutY="220.0" opacity="0.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label layoutX="30.0" layoutY="70.0" text="New Available Quantity:">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="recountRequestField" layoutX="30.0" layoutY="120.0" onKeyPressed="#recountRequestFieldKeyPressed" prefWidth="600.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="costRequestBox" layoutX="270.0" layoutY="220.0" opacity="0.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label layoutX="30.0" layoutY="70.0" text="New Cost:">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="costRequestField" layoutX="30.0" layoutY="120.0" onKeyPressed="#costRequestFieldKeyPressed" prefWidth="600.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="costRequestBox1" layoutX="270.0" layoutY="220.0" opacity="0.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label layoutX="30.0" layoutY="70.0" text="New Cost:">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="costRequestField1" layoutX="30.0" layoutY="120.0" onKeyPressed="#costRequestFieldKeyPressed" prefWidth="600.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="stockRequestBox" layoutX="270.0" layoutY="220.0" opacity="0.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label layoutX="30.0" layoutY="70.0" text="New Stock Quantity:">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="stockRequestField" layoutX="30.0" layoutY="120.0" onKeyPressed="#stockRequestFieldKeyPressed" prefWidth="600.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="deleteRequestBox" layoutX="270.0" layoutY="220.0" opacity="0.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label fx:id="deleteRequestLabel" layoutX="30.0" layoutY="70.0">
+                     <font>
+                        <Font name="Monospaced Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="deleteRequestField" layoutX="30.0" layoutY="120.0" onKeyPressed="#deleteRequestFieldKeyPressed" prefWidth="600.0">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="partSelect" layoutX="130.0" layoutY="110.0" maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" opacity="0.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #656565; -fx-border-color: black; -fx-border-width: 7; -fx-border-insets: 10;">
+               <children>
+                  <Label fx:id="partSelectorTitleLabel" alignment="CENTER" layoutX="175.0" maxWidth="650.0" minWidth="650.0" prefWidth="650.0" style="-fx-background-color: black;" text="Select Part" textFill="WHITE">
+                     <font>
+                        <Font name="Monospaced Bold" size="30.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <VBox fx:id="labelContainer" layoutX="17.0" layoutY="75.0" maxHeight="600.0" maxWidth="965.0" minHeight="600.0" minWidth="965.0" prefHeight="600.0" prefWidth="965.0">
+                     <children>
+                        <Label prefWidth="965.0" text="asdfsadf" textFill="WHITE">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="74.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="138.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="202.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="266.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="330.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="394.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="458.0" prefWidth="965.0" text="AOA 67060 PARTS MASTER OIL FILTER">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <TextField fx:id="selectorLock" onKeyPressed="#selectorKeyPress" opacity="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></AnchorPane>
+      <Label fx:id="errorLabel" layoutX="40.0" layoutY="925.0" textFill="RED">
+         <font>
+            <Font name="Monospaced Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

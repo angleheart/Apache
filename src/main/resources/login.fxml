@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024" prefWidth="1280" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Apache.Login.Login">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <VBox alignment="CENTER" layoutX="7.0" layoutY="7.0" prefHeight="150.0" prefWidth="1266.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-color: antiqueqhite;">
+                    <children>
+                        <Label text="WELCOME TO">
+                            <font>
+                                <Font size="31.0" />
+                            </font>
+                        </Label>
+                        <Label text="APACHE AUTO PARTS">
+                            <font>
+                                <Font name="System Bold Italic" size="48.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <ImageView fitHeight="130.0" fitWidth="200.0" layoutX="25.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logo.png" />
+                    </image></ImageView>
+                <VBox layoutX="7.0" layoutY="174.0" prefHeight="825.0" prefWidth="1266.0" style="-fx-border-color: black; -fx-border-width: 5;">
+               <children>
+                  <Label text="Username:">
+                     <font>
+                        <Font name="Monospaced Bold" size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets left="300.0" right="300.0" top="40.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="100.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="usernameField" onKeyPressed="#usernameFieldKeyPressed" prefHeight="80.0">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="300.0" right="300.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label layoutX="15.0" layoutY="15.0" text="Password:">
+                     <font>
+                        <Font name="Monospaced Bold" size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets left="300.0" right="40.0" top="40.0" />
+                     </padding>
+                  </Label>
+                  <PasswordField fx:id="passwordField" onKeyPressed="#passwordFieldKeyPressed" prefHeight="80.0">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="300.0" right="300.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Label fx:id="errorLabel" layoutX="15.0" layoutY="224.0" textFill="RED">
+                     <font>
+                        <Font name="Monospaced Bold" size="40.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" right="40.0" top="40.0" />
+                     </padding>
+                  </Label>
+               </children></VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
