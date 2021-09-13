@@ -21,7 +21,7 @@ public class SelectionMenu {
     private static TextField SELECTOR_LOCK;
 
     private static SelectionMenuType type;
-    private static List<Selectable> selectables;
+    private static List<Transferable> selectables;
 
     private static int selectableDisplayStartIndex;
     private static int selectableIndex;
@@ -33,7 +33,7 @@ public class SelectionMenu {
         costEntered = cost;
     }
 
-    private static final List<Selectable> specialFunctions = new ArrayList<>();
+    private static final List<Transferable> specialFunctions = new ArrayList<>();
 
     public static void initiate(
             Label titleLabel,
@@ -54,7 +54,7 @@ public class SelectionMenu {
         specialFunctions.add(new SpecialFunction("Review Open Invoices"));
     }
 
-    public static void performRequest(SelectionMenuType typeSet, List<Selectable> listSet) {
+    public static void performRequest(SelectionMenuType typeSet, List<Transferable> listSet) {
         type = typeSet;
 
         if (type == SelectionMenuType.INVOICE_VIEW_CALLBACK) {
@@ -243,7 +243,7 @@ public class SelectionMenu {
                     close();
                     InputMenu.performRequest(InputMenuType.INVOICE_VIEW);
                 } else if (selectables.get(selectableIndex).getSelectableName().contains("Review Open")) {
-                    List<Selectable> invoices = InvoiceBase.getAllOpenInvoices();
+                    List<Transferable> invoices = InvoiceBase.getAllOpenInvoices();
                     if (invoices == null) {
                         Error.send("A Apache.database error occurred");
                         cancel();

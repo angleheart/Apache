@@ -1,8 +1,7 @@
 package Apache.objects;
 
-public interface Selectable {
+public interface Transferable {
 
     String getSelectableName();
-
 
 }

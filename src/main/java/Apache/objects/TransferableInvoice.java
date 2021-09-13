@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class TransferableInvoice implements Invoiceable {
+public class TransferableInvoice implements Invoiceable, Transferable {
 
     private final TransferableInvoiceLine[] lines;
     private final InvoiceTotals totals;
@@ -151,5 +151,10 @@ public class TransferableInvoice implements Invoiceable {
     @Override
     public String getTransCode() {
         return transCode;
+    }
+
+    @Override
+    public String getSelectableName() {
+        return null;
     }
 }

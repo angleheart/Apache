@@ -2,7 +2,7 @@ package Apache.database;
 
 import Apache.objects.Payment;
 import Apache.objects.PerInvoicePayment;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,8 +17,8 @@ import static Apache.database.Connector.*;
 
 public class PaymentBase {
 
-    public static List<Selectable> getAllOpenBasicPayments() {
-        List<Selectable> payments = new ArrayList<>();
+    public static List<Transferable> getAllOpenBasicPayments() {
+        List<Transferable> payments = new ArrayList<>();
         try {
             Connection connection = getConnection();
             ResultSet paymentResults = connection.createStatement().executeQuery(

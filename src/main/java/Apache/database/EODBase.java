@@ -1,7 +1,7 @@
 package Apache.database;
 
 import Apache.console.eod.EODReport;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,16 +17,16 @@ import static Apache.database.Connector.getConnection;
 
 public class EODBase {
 
-    public static List<Selectable> getAllOpenReleases() {
+    public static List<Transferable> getAllOpenReleases() {
 
-        List<Selectable> releases = new ArrayList<>();
+        List<Transferable> releases = new ArrayList<>();
 
         try {
-            List<Selectable> invoices = InvoiceBase.getAllOpenInvoices();
+            List<Transferable> invoices = InvoiceBase.getAllOpenInvoices();
             if (invoices == null)
                 return null;
 
-            List<Selectable> payments = PaymentBase.getAllOpenBasicPayments();
+            List<Transferable> payments = PaymentBase.getAllOpenBasicPayments();
             if (payments == null)
                 return null;
 

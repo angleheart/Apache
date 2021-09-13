@@ -1,7 +1,7 @@
 package Apache.database;
 
 import Apache.objects.CounterPerson;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,8 +29,8 @@ public class CounterPersonBase {
     }
 
 
-    public static List<Selectable> getAllCounterPeople() {
-        List<Selectable> counterPeople = new ArrayList<>();
+    public static List<Transferable> getAllCounterPeople() {
+        List<Transferable> counterPeople = new ArrayList<>();
         try {
             Connection conn = getConnection();
 

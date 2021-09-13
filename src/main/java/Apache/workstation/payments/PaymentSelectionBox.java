@@ -1,25 +1,19 @@
 package Apache.workstation.payments;
 
-import Apache.database.PartBase;
-import Apache.database.SaleBase;
 import Apache.objects.Customer;
-import Apache.objects.Part;
-import Apache.objects.Selectable;
-import Apache.util.InputVerifier;
+import Apache.objects.Transferable;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.util.List;
 
 class PaymentSelectionBox {
 
-    private static List<Selectable> selectables;
+    private static List<Transferable> selectables;
     private static Label[] labels;
     private static int selectableDisplayStartIndex;
     private static int selectableIndex;
@@ -39,7 +33,7 @@ class PaymentSelectionBox {
             labels[index] = (Label) nodes.get(index);
     }
 
-    static void performCustomerRequest(List<Selectable> customers) {
+    static void performCustomerRequest(List<Transferable> customers) {
         clearLabels();
         selectables = customers;
         focusIndex = 0;

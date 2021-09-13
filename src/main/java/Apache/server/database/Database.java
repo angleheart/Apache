@@ -1,19 +1,29 @@
 package Apache.server.database;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public abstract class Database {
+public abstract class Database implements AutoCloseable {
 
-    final Connection connection;
+    private static DataSource DATA_SOURCE;
+    Connection connection;
 
-    public Database(Connection connection) {
-        this.connection = connection;
+    public static void setDataSource(DataSource dataSource){
+        DATA_SOURCE = dataSource;
     }
 
-    public Statement createStatement() throws SQLException {
-        return connection.createStatement();
+    public Database(){
+        try {
+            this.connection = DATA_SOURCE.getConnection();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            System.out.println("[Error] Failed to establish database connection");
+        }
     }
 
+    @Override
+    public void close() throws SQLException {
+        connection.close();
+    }
 }

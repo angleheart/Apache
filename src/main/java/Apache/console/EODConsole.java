@@ -10,7 +10,7 @@ import Apache.util.PrintUtility;
 import Apache.objects.Invoice;
 import Apache.objects.Payment;
 import Apache.objects.Release;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -36,7 +36,7 @@ public class EODConsole extends Console {
         input = input.toUpperCase(Locale.ROOT);
         switch (input) {
             case "BALANCE" -> {
-                List<Selectable> openReleases = EODBase.getAllOpenReleases();
+                List<Transferable> openReleases = EODBase.getAllOpenReleases();
                 if (openReleases == null) {
                     Console.printError("A Apache.database error occurred");
                     return true;
@@ -49,7 +49,7 @@ public class EODConsole extends Console {
                 double checkPayments = 0;
                 double plasticPayments = 0;
 
-                for (Selectable releaseSelectable : openReleases) {
+                for (Transferable releaseSelectable : openReleases) {
                     Release release = (Release) releaseSelectable;
                     switch (release.getType()) {
 
@@ -176,12 +176,12 @@ public class EODConsole extends Console {
                 }
 
                 System.out.println("Collecting all open invoices...");
-                List<Selectable> openInvoicesAsSelectable = InvoiceBase.getAllOpenInvoices();
+                List<Transferable> openInvoicesAsTransferable = InvoiceBase.getAllOpenInvoices();
                 System.out.println("Collecting all open payments...");
-                List<Selectable> openPaymentsAsSelectable = PaymentBase.getAllOpenBasicPayments();
+                List<Transferable> openPaymentsAsSelectable = PaymentBase.getAllOpenBasicPayments();
                 Date cutOff = new Date();
 
-                if (openInvoicesAsSelectable == null) {
+                if (openInvoicesAsTransferable == null) {
                     Console.printError("Failed to collect open invoices");
                     return true;
                 }
@@ -191,7 +191,7 @@ public class EODConsole extends Console {
                     return true;
                 }
 
-                if (openInvoicesAsSelectable.size() == 0) {
+                if (openInvoicesAsTransferable.size() == 0) {
                     Console.printWarning("There are currently no open invoices.\n" +
                             "Are you sure you would like to generate a report?");
                     Console.printConfirmRequest();
@@ -203,13 +203,13 @@ public class EODConsole extends Console {
                 }
 
                 List<Invoice> openInvoices = new ArrayList<>();
-                for (Selectable invoice : openInvoicesAsSelectable)
+                for (Transferable invoice : openInvoicesAsTransferable)
                     openInvoices.add((Invoice) invoice);
                 Console.printSuccess("Collected all open invoices");
 
 
                 List<Payment> openPayments = new ArrayList<>();
-                for (Selectable payment : openPaymentsAsSelectable) {
+                for (Transferable payment : openPaymentsAsSelectable) {
                     openPayments.add((Payment) payment);
                 }
                 Console.printSuccess("Collected all open payments");

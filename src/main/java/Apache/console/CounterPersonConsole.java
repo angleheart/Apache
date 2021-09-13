@@ -2,7 +2,7 @@ package Apache.console;
 
 import Apache.objects.CounterPerson;
 import Apache.database.CounterPersonBase;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 import Apache.util.InputRefiner;
 import Apache.util.InputVerifier;
 
@@ -27,13 +27,13 @@ public class CounterPersonConsole extends Console {
         input = input.toUpperCase(Locale.ROOT);
         switch (input) {
             case "LIST" -> {
-                List<Selectable> counterPeople = CounterPersonBase.getAllCounterPeople();
+                List<Transferable> counterPeople = CounterPersonBase.getAllCounterPeople();
                 if (counterPeople.size() == 0) {
                     Console.printError("No results");
                     return true;
                 }
 
-                for (Selectable counterPerson : counterPeople) {
+                for (Transferable counterPerson : counterPeople) {
                     System.out.println(counterPerson.getSelectableName());
                 }
                 return true;

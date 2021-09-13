@@ -1,13 +1,13 @@
 package Apache.workstation.pos;
 
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static Apache.util.General.cleanDouble;
 
-public class PastPurchase implements Selectable {
+public class PastPurchase implements Transferable {
 
     public int invoiceNumber;
     public String mfg;

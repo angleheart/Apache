@@ -5,7 +5,7 @@ import Apache.config.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sequence implements Selectable{
+public class Sequence implements Transferable {
 
     private final String saveName;
     private final Customer customer;

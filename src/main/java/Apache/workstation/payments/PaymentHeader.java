@@ -6,7 +6,7 @@ import Apache.objects.Customer;
 import Apache.database.CustomerBase;
 import Apache.database.InvoiceBase;
 import Apache.objects.Invoice;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 import Apache.workstation.SceneController;
 import Apache.util.InputVerifier;
 import Apache.util.TextFieldModifier;
@@ -183,12 +183,13 @@ public class PaymentHeader {
                     }
                     PaymentError.clear();
                     if (customers.size() == 1) {
-                        customer = customers.get(0);
+                        customer = (Customer)customers.get(0);
                         CUSTOMER_FIELD.setText(customer.getNumber());
                         afterCustomerSelected();
                         return;
                     }
-                    PaymentSelectionBox.performCustomerRequest(new ArrayList<>(customers));
+
+                    //PaymentSelectionBox.performCustomerRequest(customers);
                 }
             }
 

@@ -2,7 +2,7 @@ package Apache.database;
 
 import Apache.objects.PartLedgerEntry;
 import Apache.workstation.pos.PastPurchase;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,12 +14,12 @@ import static Apache.database.Connector.getConnection;
 
 public class SaleBase {
 
-    public static List<Selectable> getPastPurchases(
+    public static List<Transferable> getPastPurchases(
             String customerNumber,
             String mfg,
             String partNumber
     ) {
-        List<Selectable> pastPurchases = new ArrayList<>();
+        List<Transferable> pastPurchases = new ArrayList<>();
         try {
             Connection conn = getConnection();
             ResultSet results = conn.createStatement().executeQuery(
@@ -45,11 +45,11 @@ public class SaleBase {
         }
     }
 
-    public static List<Selectable> getPartLedgerEntries(
+    public static List<Transferable> getPartLedgerEntries(
             String mfg,
             String partNumber
     ){
-        List<Selectable> entries = new ArrayList<>();
+        List<Transferable> entries = new ArrayList<>();
         try{
             Connection conn = getConnection();
             ResultSet resultSet = conn.createStatement().executeQuery(
@@ -70,7 +70,7 @@ public class SaleBase {
                 entries.add(
                         new PartLedgerEntry(
                                 invoiceNumber,
-                                new java.util.Date(resultSet.getTimestamp("ReleaseTime").getTime()),
+                                resultSet.getTimestamp("ReleaseTime").getTime(),
                                 customerNumber,
                                 resultSet.getString("TransCode"),
                                 resultSet.getInt("Quantity"),

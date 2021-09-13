@@ -9,21 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Apache.database.Connector.getConnection;
-
 public class PartDatabase extends Database {
 
-    public PartDatabase(Connection connection) {
-        super(connection);
-    }
-
-    public List<Part> getParts(String mfg, String partNumber) throws SQLException {
+    public List<Transferable> getParts(String mfg, String partNumber) throws SQLException {
 
         partNumber = partNumber.replaceAll("/", "");
         partNumber = partNumber.replaceAll("-", "");
         partNumber = partNumber.replaceAll(" ", "");
 
-        List<Part> toReturn = new ArrayList<>();
+        List<Transferable> toReturn = new ArrayList<>();
         PreparedStatement prepStatement;
         ResultSet resultSet;
 

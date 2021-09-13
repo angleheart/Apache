@@ -14,26 +14,28 @@ import static Apache.database.Connector.getConnection;
 
 public class InvoiceDatabase extends Database {
 
-    public InvoiceDatabase(Connection connection) {
-        super(connection);
+    private final CustomerDatabase customerDatabase;
+
+    public InvoiceDatabase(){
+        this.customerDatabase = new CustomerDatabase();
     }
 
-    public List<TransferableInvoice> getOpenInvoices() throws SQLException {
+    public List<Transferable> getOpenInvoices() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT InvoiceNumber FROM Invoices WHERE AccountingPeriod = 0;"
         );
         ResultSet openNumbers = preparedStatement.executeQuery();
-        List<TransferableInvoice> toReturn = new ArrayList<>();
+        List<Transferable> toReturn = new ArrayList<>();
         while(openNumbers.next())
             toReturn.add(getInvoiceByNumber(openNumbers.getInt("InvoiceNumber")));
         return toReturn;
     }
 
-    public TransferableInvoice getInvoiceByNumber(int invoiceNumber) throws SQLException {
+    public Transferable getInvoiceByNumber(int invoiceNumber) throws SQLException {
         return getInvoiceByNumber(invoiceNumber, null);
     }
 
-    public TransferableInvoice getInvoiceByNumber(int invoiceNumber, Customer customer) throws SQLException {
+    public Transferable getInvoiceByNumber(int invoiceNumber, Customer customer) throws SQLException {
 
         PreparedStatement prepStatement = connection.prepareStatement(
                 "SELECT * FROM Invoices WHERE InvoiceNumber = ?;"
@@ -70,19 +72,10 @@ public class InvoiceDatabase extends Database {
             );
 
         if(customer == null){
-            CustomerDatabase customerDatabase = new CustomerDatabase(connection);
             List<Customer> customers = customerDatabase.getCustomers(
                     invoiceResults.getString("CustomerNumber")
             );
             customer = customers.get(0);
-            if(customer == null){
-                customer = new Customer(
-                        "000", "Unknown Customer", "", "", "", "", "",
-                        Config.DEFAULT_COST_MULTIPLIER,
-                        true,
-                        true
-                );
-            }
         }
 
         return new TransferableInvoice(
@@ -109,7 +102,7 @@ public class InvoiceDatabase extends Database {
 
     public int getInvoiceNumber() {
         try {
-            ResultSet highestNumber = createStatement().executeQuery(
+            ResultSet highestNumber = connection.createStatement().executeQuery(
                     "SELECT MAX(InvoiceNumber) FROM UsedInvoiceNumbers;"
             );
             if (!highestNumber.next())

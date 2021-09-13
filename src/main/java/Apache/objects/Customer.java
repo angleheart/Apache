@@ -2,7 +2,7 @@ package Apache.objects;
 
 import java.util.Locale;
 
-public class Customer implements Selectable {
+public class Customer implements Transferable {
 
     private final String number;
     private final String name;

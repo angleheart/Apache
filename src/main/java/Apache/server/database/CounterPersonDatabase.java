@@ -1,8 +1,7 @@
 package Apache.server.database;
 
 import Apache.objects.CounterPerson;
-
-import java.sql.Connection;
+import Apache.objects.Transferable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,11 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CounterPersonDatabase extends Database {
-
-
-    public CounterPersonDatabase(Connection connection) {
-        super(connection);
-    }
 
     public List<CounterPerson> getCounterPeople(String query) throws SQLException {
         PreparedStatement prepStatement = connection.prepareStatement(

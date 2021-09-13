@@ -236,8 +236,8 @@ public class InvoiceBase {
     }
 
 
-    public static List<Selectable> getAllOpenInvoices() {
-        List<Selectable> invoices = new ArrayList<>();
+    public static List<Transferable> getAllOpenInvoices() {
+        List<Transferable> invoices = new ArrayList<>();
         try {
             Connection conn = getConnection();
             ResultSet invoiceResults = conn.createStatement().executeQuery(

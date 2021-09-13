@@ -1,7 +1,7 @@
 package Apache.database;
 
 import Apache.objects.Customer;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -41,8 +41,8 @@ public class CustomerBase {
         }
     }
 
-    public static List<Selectable> getCustomersByName(String customerName) {
-        List<Selectable> customers = new ArrayList<>();
+    public static List<Transferable> getCustomersByName(String customerName) {
+        List<Transferable> customers = new ArrayList<>();
         try {
             Connection conn = getConnection();
             ResultSet resultSet = conn.createStatement().executeQuery(

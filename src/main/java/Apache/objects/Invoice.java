@@ -7,7 +7,7 @@ import java.util.List;
 import static Apache.objects.ReleaseType.INVOICE;
 import static Apache.util.General.cleanDouble;
 
-public class Invoice extends Release implements Selectable, Invoiceable {
+public class Invoice extends Release implements Transferable, Invoiceable {
 
     private final int invoiceNumber;
     private final int counterPersonNumber;

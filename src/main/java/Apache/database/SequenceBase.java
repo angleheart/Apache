@@ -4,7 +4,7 @@ import Apache.objects.SequenceLine;
 import Apache.objects.Sequence;
 import Apache.objects.CounterPerson;
 import Apache.objects.Customer;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,8 +17,8 @@ import static Apache.database.Connector.*;
 
 public class SequenceBase {
 
-    public static List<Selectable> getSequences() {
-        List<Selectable> sequences = new ArrayList<>();
+    public static List<Transferable> getSequences() {
+        List<Transferable> sequences = new ArrayList<>();
         try {
             Connection connection = getConnection();
             ResultSet sequenceResults = connection.createStatement().executeQuery(

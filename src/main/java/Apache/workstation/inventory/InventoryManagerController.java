@@ -4,7 +4,7 @@ import Apache.database.PartBase;
 import Apache.database.SaleBase;
 import Apache.objects.Part;
 import Apache.workstation.SceneController;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 import Apache.util.InputVerifier;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -702,7 +702,7 @@ public class InventoryManagerController {
     }
 
 
-    private List<Selectable> selectables;
+    private List<Transferable> selectables;
     private final Label[] labels = new Label[9];
     private int selectableDisplayStartIndex;
     private int selectableIndex;

@@ -5,10 +5,10 @@ import java.util.Date;
 
 import static Apache.util.General.cleanDouble;
 
-public class PartLedgerEntry implements Selectable {
+public class PartLedgerEntry implements Transferable {
 
     private final int invoiceNumber;
-    private final Date date;
+    private final long time;
     private final String customerNumber;
     private final String transCode;
     private final int quantity;
@@ -16,14 +16,14 @@ public class PartLedgerEntry implements Selectable {
 
     public PartLedgerEntry(
             int invoiceNumber,
-            Date date,
+            long time,
             String customerNumber,
             String transCode,
             int quantity,
             double unitPrice
     ) {
         this.invoiceNumber = invoiceNumber;
-        this.date = date;
+        this.time = time;
         this.customerNumber = customerNumber;
         this.transCode = transCode;
         this.quantity = quantity;
@@ -36,11 +36,9 @@ public class PartLedgerEntry implements Selectable {
         int cleanQuantity = quantity;
         if (cleanQuantity < 0)
             cleanQuantity *= -1;
-
-
         return
                 "D" + invoiceNumber + " " +
-                        sdf.format(date) + " " +
+                        sdf.format(new Date(time)) + " " +
                         customerNumber + " " +
                         transCode + "  " +
                         cleanQuantity + " @ " +

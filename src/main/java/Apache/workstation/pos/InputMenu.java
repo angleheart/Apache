@@ -24,8 +24,6 @@ public class InputMenu {
     private static TextField INPUT_MENU_FIELD;
     private static Label INPUT_MENU_HELP_LABEL;
 
-    private static ExecutorService executor = Executors.newCachedThreadPool();
-
     static void initiate(
             AnchorPane inputMenuPane,
             Label inputMenuLabel,
@@ -269,7 +267,7 @@ public class InputMenu {
                     if(Config.STAND_ALONE)
                      invoice = InvoiceBase.getInvoiceByNumberFromAll(invoiceNumber);
                     else
-                        invoice = Gateway.getInvoiceByNumber(invoiceNumber);
+                        invoice = (Invoice) Gateway.getInvoiceByNumber(invoiceNumber);
 
                     if (invoice == null) {
                         Error.send("Failed to open invoice");

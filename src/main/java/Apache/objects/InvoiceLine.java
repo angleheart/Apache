@@ -2,7 +2,7 @@ package Apache.objects;
 
 import java.util.Date;
 
-public class InvoiceLine extends Line implements Selectable, InvoiceableLine {
+public class InvoiceLine extends Line implements Transferable, InvoiceableLine {
 
     private final int invoiceNumber;
     private final Date date;

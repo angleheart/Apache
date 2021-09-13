@@ -2,7 +2,7 @@ package Apache.objects;
 
 import java.util.Date;
 
-public abstract class Release implements Selectable {
+public abstract class Release implements Transferable {
 
     private final ReleaseType releaseType;
     private final ReleaseCode releaseCode;

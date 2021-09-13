@@ -7,63 +7,54 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static Apache.util.JSONTransformer.fromJson;
+import static Apache.util.JSONTransformer.*;
 
 public class Gateway {
 
     private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
 
+    private static HttpGet getHttpGet(String request) {
+        return new HttpGet("http://" + Config.TARGET_SERVER + ":" + Config.TARGET_PORT + request);
+    }
+
+    private static String getJsonResponse(HttpGet request) {
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(request)) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static List<Customer> queryCustomers(String query) {
-        try {
-            HttpGet request = new HttpGet(
-                    "http://" +
-                            Config.TARGET_SERVER + ":"
-                            + Config.TARGET_PORT +
-                            "/customers/" + query
-            );
-            try (CloseableHttpClient httpClient = HttpClients.createDefault();
-                 CloseableHttpResponse response = httpClient.execute(request)) {
-                CustomerResponse customerResponse =
-                        fromJson(
-                                CustomerResponse.class,
-                                EntityUtils.toString(response.getEntity())
-                        );
-                return customerResponse.getCustomers();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        String response = getJsonResponse(getHttpGet("/customers/" + query));
+        return response == null ? null : Arrays.asList(fromJson(Customer[].class, response));
     }
 
-    public static List<CounterPerson> queryCounterPeople(String query) {
-        try {
-            HttpGet request = new HttpGet(
-                    "http://" +
-                            Config.TARGET_SERVER + ":"
-                            + Config.TARGET_PORT +
-                            "/counterperson/" + query
+
+    public static List<Object> queryCounterPeople(String query) {
+        HttpGet request = getHttpGet("/customers/" + query);
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+             CloseableHttpResponse response = httpClient.execute(request)) {
+            Transfer transfer = fromJson(
+                    Transfer.class,
+                    EntityUtils.toString(response.getEntity())
             );
-            try (CloseableHttpClient httpClient = HttpClients.createDefault();
-                 CloseableHttpResponse response = httpClient.execute(request)) {
-                CounterPersonResponse cpResponse = fromJson(
-                        CounterPersonResponse.class,
-                        EntityUtils.toString(response.getEntity())
-                );
-                return cpResponse.getCounterPeople();
-            }
-        } catch (Exception e) {
+            return transfer.getContents();
+        } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
-    public static List<Part> queryParts(String mfgQuery, String numberQuery) {
+    public static List<Object> queryParts(String mfgQuery, String numberQuery) {
         try {
             HttpGet request = new HttpGet(
                     "http://" +
@@ -73,11 +64,11 @@ public class Gateway {
             );
             try (CloseableHttpClient httpClient = HttpClients.createDefault();
                  CloseableHttpResponse response = httpClient.execute(request)) {
-                PartResponse partResponse = fromJson(
-                        PartResponse.class,
+                Transfer transfer = fromJson(
+                        Transfer.class,
                         EntityUtils.toString(response.getEntity())
                 );
-                return partResponse.getParts();
+                return transfer.getContents();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +76,7 @@ public class Gateway {
         return null;
     }
 
-    public static List<Invoice> getOpenInvoices(){
+    public static List<Object> getOpenInvoices() {
         try {
             HttpGet request = new HttpGet(
                     "http://" +
@@ -95,11 +86,11 @@ public class Gateway {
             );
             try (CloseableHttpClient httpClient = HttpClients.createDefault();
                  CloseableHttpResponse response = httpClient.execute(request)) {
-                InvoiceResponse invoiceResponse = fromJson(
-                        InvoiceResponse.class,
+                Transfer transfer = fromJson(
+                        Transfer.class,
                         EntityUtils.toString(response.getEntity())
                 );
-                return invoiceResponse.getInvoices();
+                return transfer.getContents();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,9 +98,9 @@ public class Gateway {
         return null;
     }
 
-    public static Invoice getInvoiceByNumber(String invoiceNumber){
+    public static Object getInvoiceByNumber(String invoiceNumber) {
         try {
-            if(invoiceNumber.startsWith("D"))
+            if (invoiceNumber.startsWith("D"))
                 invoiceNumber = invoiceNumber.substring(1);
             HttpGet request = new HttpGet(
                     "http://" +
@@ -119,11 +110,11 @@ public class Gateway {
             );
             try (CloseableHttpClient httpClient = HttpClients.createDefault();
                  CloseableHttpResponse response = httpClient.execute(request)) {
-                InvoiceResponse invoiceResponse = fromJson(
-                        InvoiceResponse.class,
+                Transfer transfer = fromJson(
+                        Transfer.class,
                         EntityUtils.toString(response.getEntity())
                 );
-                return invoiceResponse.getInvoice();
+                return transfer.getFirstContent();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,10 +122,10 @@ public class Gateway {
         return null;
     }
 
-
     public static void postSequenceRelease(Sequence sequence, int releaseCode) {
         EXECUTOR.execute(new SequencePostRunnable(sequence, releaseCode));
     }
+
 
 
 }

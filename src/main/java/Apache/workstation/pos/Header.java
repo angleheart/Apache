@@ -1,12 +1,13 @@
 package Apache.workstation.pos;
 
 import Apache.config.Config;
+import Apache.http.Transfer;
 import Apache.objects.CounterPerson;
 import Apache.objects.Customer;
 import Apache.database.CounterPersonBase;
 import Apache.database.CustomerBase;
 import Apache.workstation.SceneController;
-import Apache.objects.Selectable;
+import Apache.objects.Transferable;
 import Apache.util.InputVerifier;
 import Apache.util.TextFieldModifier;
 import Apache.http.Gateway;
@@ -155,7 +156,7 @@ public class Header {
             if (Config.STAND_ALONE) {
                 Customer customer = CustomerBase.getCustomerByNumber(customerRequest);
                 if (customer == null) {
-                    List<Selectable> customerList = CustomerBase.getCustomersByName(customerRequest);
+                    List<Transferable> customerList = CustomerBase.getCustomersByName(customerRequest);
                     if (customerList.size() == 0) {
                         Error.send("No customers found");
                         Header.resetCustomerInfo();
@@ -202,8 +203,7 @@ public class Header {
                         focusCounterPersonField();
                     }
                     default -> {
-                        List<Selectable> selectableCustomers = new ArrayList<>(customers);
-                        SelectionMenu.performRequest(SelectionMenuType.CUSTOMER, selectableCustomers);
+                        SelectionMenu.performRequest(SelectionMenuType.CUSTOMER, new ArrayList<>(customers));
                     }
                 }
             }
@@ -239,7 +239,7 @@ public class Header {
                     return;
                 }
             } else {
-                List<CounterPerson> counterPeople = Gateway.queryCounterPeople(query);
+                List<Object> counterPeople = Gateway.queryCounterPeople(query);
                 if(counterPeople == null){
                     Error.send("A server error occurred");
                     COUNTER_PERSON_NUMBER_FIELD.clear();
@@ -251,7 +251,7 @@ public class Header {
                     focusCounterPersonField();
                     return;
                 }else{
-                    counterPerson = counterPeople.get(0);
+                    counterPerson = (CounterPerson) counterPeople.get(0);
                 }
             }
 
