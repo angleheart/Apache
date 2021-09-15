@@ -1,6 +1,6 @@
 package Apache.objects;
 
-public class CounterPerson implements Transferable {
+public class CounterPerson implements Selectable {
 
     private final int number;
     private final String name;

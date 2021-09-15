@@ -15,7 +15,16 @@ public class SequenceLine extends Line {
             double unitPrice,
             String tx
     ) {
-        super(indexKey, transCode, qty, mfg, partNumber, description, listPrice, unitPrice, tx);
+        super(indexKey,
+                transCode,
+                qty,
+                mfg,
+                partNumber,
+                description,
+                listPrice,
+                unitPrice,
+                tx
+        );
     }
 
     public boolean isVoided() {

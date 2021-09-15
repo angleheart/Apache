@@ -2,32 +2,18 @@ package Apache.objects;
 
 import java.util.Date;
 
-public class InvoiceLine extends Line implements Transferable, InvoiceableLine {
+import static Apache.util.General.cleanDouble;
+
+public class InvoiceLine extends Line implements Selectable {
 
     private final int invoiceNumber;
-    private final Date date;
+    private final long time;
     private double corePrice;
-
-    public InvoiceLine(TransferableInvoiceLine transferLine){
-        super(
-                transferLine.getIndexKey(),
-                transferLine.getTransCode(),
-                transferLine.getQty(),
-                transferLine.getMfg(),
-                transferLine.getPartNumber(),
-                transferLine.getDescription(),
-                transferLine.getListPrice(),
-                transferLine.getUnitPrice(),
-                transferLine.getTx()
-        );
-        invoiceNumber = transferLine.getInvoiceNumber();
-        date = transferLine.getDate();
-    }
 
     public InvoiceLine(
             int indexKey,
             int invoiceNumber,
-            Date date,
+            long time,
             String transCode,
             int qty,
             String mfg,
@@ -38,30 +24,55 @@ public class InvoiceLine extends Line implements Transferable, InvoiceableLine {
             double corePrice,
             String tx
     ) {
-        super(indexKey, transCode, qty, mfg, partNumber, description, listPrice, unitPrice, tx);
-        this.invoiceNumber = invoiceNumber;
-        this.date = date;
-        this.corePrice = corePrice;
-    }
+        super(
+                indexKey,
+                transCode,
+                qty,
+                mfg,
+                partNumber,
+                description,
+                listPrice,
+                unitPrice,
+                tx
+        );
 
-    public Date getDate(){
-        return date;
+        this.invoiceNumber = invoiceNumber;
+        this.time = time;
+        this.corePrice = corePrice;
     }
 
     public int getInvoiceNumber(){
         return invoiceNumber;
     }
 
-    public double getCorePrice(){
+    public long getTime(){
+        return time;
+    }
+
+    public Date getDate(){
+        return new Date(time);
+    }
+
+    public double getCorePrice() {
         return corePrice;
     }
 
-    public void setCorePrice(double corePrice){
+    public void setCorePrice(double corePrice) {
         this.corePrice = corePrice;
+    }
+
+    public double getExtendedPrice() {
+        return Double.parseDouble(
+                cleanDouble(
+                        getUnitPrice() * getQty(),
+                        2
+                )
+        );
     }
 
     @Override
     public String getSelectableName() {
         return "";
     }
+
 }

@@ -1,131 +1,101 @@
 package Apache.http;
 
-import Apache.config.Config;
 import Apache.objects.*;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import java.io.IOException;
+import org.apache.http.client.methods.*;
+import org.apache.http.entity.StringEntity;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import static Apache.http.GatewayUtil.*;
 import static Apache.util.JSONTransformer.*;
 
 public class Gateway {
 
-    private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
-
-    private static HttpGet getHttpGet(String request) {
-        return new HttpGet("http://" + Config.TARGET_SERVER + ":" + Config.TARGET_PORT + request);
-    }
-
-    private static String getJsonResponse(HttpGet request) {
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(request)) {
-            return EntityUtils.toString(response.getEntity());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public static List<Customer> queryCustomers(String query) {
-        String response = getJsonResponse(getHttpGet("/customers/" + query));
+        String response = getJsonResponse("/customers/" + query);
         return response == null ? null : Arrays.asList(fromJson(Customer[].class, response));
     }
 
-
-    public static List<Object> queryCounterPeople(String query) {
-        HttpGet request = getHttpGet("/customers/" + query);
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse response = httpClient.execute(request)) {
-            Transfer transfer = fromJson(
-                    Transfer.class,
-                    EntityUtils.toString(response.getEntity())
-            );
-            return transfer.getContents();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static List<CounterPerson> queryCounterPeople(String query) {
+        String response = getJsonResponse("/counterperson/" + query);
+        return response == null ? null : Arrays.asList(fromJson(CounterPerson[].class, response));
     }
 
-    public static List<Object> queryParts(String mfgQuery, String numberQuery) {
-        try {
-            HttpGet request = new HttpGet(
-                    "http://" +
-                            Config.TARGET_SERVER + ":"
-                            + Config.TARGET_PORT +
-                            "/parts/" + mfgQuery + "/" + numberQuery
-            );
-            try (CloseableHttpClient httpClient = HttpClients.createDefault();
-                 CloseableHttpResponse response = httpClient.execute(request)) {
-                Transfer transfer = fromJson(
-                        Transfer.class,
-                        EntityUtils.toString(response.getEntity())
-                );
-                return transfer.getContents();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static List<Part> queryParts(String mfgQuery, String numberQuery) {
+        String response = getJsonResponse("/parts/" + mfgQuery + "/" + numberQuery);
+        return response == null ? null : Arrays.asList(fromJson(Part[].class, response));
     }
 
-    public static List<Object> getOpenInvoices() {
-        try {
-            HttpGet request = new HttpGet(
-                    "http://" +
-                            Config.TARGET_SERVER + ":"
-                            + Config.TARGET_PORT +
-                            "/invoices/open"
-            );
-            try (CloseableHttpClient httpClient = HttpClients.createDefault();
-                 CloseableHttpResponse response = httpClient.execute(request)) {
-                Transfer transfer = fromJson(
-                        Transfer.class,
-                        EntityUtils.toString(response.getEntity())
-                );
-                return transfer.getContents();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static List<Invoice> getOpenInvoices() {
+        String response = getJsonResponse("/invoices/open");
+        return response == null ? null : Arrays.asList(fromJson(Invoice[].class, response));
     }
 
-    public static Object getInvoiceByNumber(String invoiceNumber) {
-        try {
-            if (invoiceNumber.startsWith("D"))
-                invoiceNumber = invoiceNumber.substring(1);
-            HttpGet request = new HttpGet(
-                    "http://" +
-                            Config.TARGET_SERVER + ":"
-                            + Config.TARGET_PORT +
-                            "/invoice/" + invoiceNumber
-            );
-            try (CloseableHttpClient httpClient = HttpClients.createDefault();
-                 CloseableHttpResponse response = httpClient.execute(request)) {
-                Transfer transfer = fromJson(
-                        Transfer.class,
-                        EntityUtils.toString(response.getEntity())
-                );
-                return transfer.getFirstContent();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static List<Invoice> getPayableInvoices(String customerNumber){
+        String response = getJsonResponse("/invoices/payable/" + customerNumber);
+        return response == null ? null : Arrays.asList(fromJson(Invoice[].class, response));
+    }
+
+    public static Invoice getInvoiceByNumber(int invoiceNumber) {
+        String response = getJsonResponse("/invoice/" + invoiceNumber);
+        return response == null ? null : fromJson(Invoice.class, response);
     }
 
     public static void postSequenceRelease(Sequence sequence, int releaseCode) {
-        EXECUTOR.execute(new SequencePostRunnable(sequence, releaseCode));
+        System.out.println("[GATEWAY] Post sequence release with code " + releaseCode);
+
+
+        HttpPost httpPost = new HttpPost("/release/sequence/" + releaseCode);
+        StringEntity entity = new StringEntity(toJson(sequence))
     }
 
+    public static List<String> getVehicleYears() {
+        String response = getJsonResponse("/vehicles/years");
+        return response == null ? null : Arrays.asList(fromJson(String[].class, response));
+    }
 
+    public static List<String> getVehicleMakes(String year) {
+        String response = getJsonResponse("/vehicles/makes/" + year);
+        return response == null ? null : Arrays.asList(fromJson(String[].class, response));
+    }
+
+    public static List<String> getVehicleModels(String year, String make) {
+        String response = getJsonResponse("/vehicles/models/" + year + "/" + make);
+        return response == null ? null : Arrays.asList(fromJson(String[].class, response));
+    }
+
+    public static List<String> getVehicleEngines(String year, String make, String model) {
+        String response = getJsonResponse("/vehicles/engines/" + year + "/" + make + "/" + model);
+        return response == null ? null : Arrays.asList(fromJson(String[].class, response));
+    }
+
+    public static boolean voidInvoice(int invoiceNumber){
+        String response = getJsonResponse("/invoice/void/" + invoiceNumber);
+        return Boolean.parseBoolean(response);
+    }
+
+    public static boolean setInvoiceReleaseCode(int invoiceNumber, int releaseCode){
+        String response = getJsonResponse("/invoice/modify/" + invoiceNumber + "/" + releaseCode);
+        return Boolean.parseBoolean(response);
+    }
+
+    public static List<Sequence> getSequences(){
+        String response = getJsonResponse("/sequence/get");
+        return response == null ? null : Arrays.asList(fromJson(Sequence[].class, response));
+    }
+
+    public static void killSequence(Sequence sequence){
+        EXECUTOR.execute(
+                new RequestRunnable(
+                        new HttpDelete()
+                        getHttpDelete()
+                )
+        );
+    }
+
+    public static void holdSequence(Sequence sequence){
+        EXECUTOR.execute(new RequestRunnable(sequence, "/sequence/hold"));
+    }
 
 }

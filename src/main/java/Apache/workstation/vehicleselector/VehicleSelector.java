@@ -1,6 +1,6 @@
 package Apache.workstation.vehicleselector;
 
-import Apache.database.VehicleBase;
+import Apache.http.Gateway;
 import Apache.workstation.pos.Header;
 import Apache.workstation.pos.PointOfSale;
 import Apache.workstation.SceneController;
@@ -16,39 +16,37 @@ import java.util.Locale;
 
 public class VehicleSelector {
 
-    private static Label YEAR_TITLE;
     private static Label MAKE_TITLE;
     private static Label MODEL_TITLE;
     private static Label ENGINE_TITLE;
 
-    private static VBox YEAR_BOX;
     private static VBox MAKE_BOX;
     private static VBox MODEL_BOX;
     private static VBox ENGINE_BOX;
 
 
-    private static Label[] YEAR_LABELS = new Label[14];
+    private static final Label[] YEAR_LABELS = new Label[14];
     private static List<String> YEAR_SOURCE;
     private static int yearDisplayStartIndex;
     private static int yearSelectIndex;
     private static int yearFocusIndex;
 
 
-    private static Label[] MAKE_LABELS = new Label[8];
+    private static final Label[] MAKE_LABELS = new Label[8];
     private static List<String> MAKE_SOURCE;
     private static int makeDisplayStartIndex;
     private static int makeSelectIndex;
     private static int makeFocusIndex;
 
 
-    private static Label[] MODEL_LABELS = new Label[8];
+    private static final Label[] MODEL_LABELS = new Label[8];
     private static List<String> MODEL_SOURCE;
     private static int modelDisplayStartIndex;
     private static int modelSelectIndex;
     private static int modelFocusIndex;
 
 
-    private static Label[] ENGINE_LABELS = new Label[4];
+    private static final Label[] ENGINE_LABELS = new Label[4];
     private static List<String> ENGINE_SOURCE;
     private static int engineDisplayStartIndex;
     private static int engineSelectIndex;
@@ -71,8 +69,6 @@ public class VehicleSelector {
             Label engineLabel,
             TextField lock
     ) {
-        YEAR_BOX = yearBox;
-        YEAR_TITLE = yearLabel;
         MAKE_BOX = makeBox;
         MAKE_TITLE = makeLabel;
         MODEL_BOX = modelBox;
@@ -82,7 +78,7 @@ public class VehicleSelector {
         LOCK_FIELD = lock;
 
         int index = 0;
-        for (Node node : YEAR_BOX.getChildren())
+        for (Node node : yearBox.getChildren())
             YEAR_LABELS[index++] = (Label) node;
         index = 0;
         for (Node node : MAKE_BOX.getChildren())
@@ -103,7 +99,7 @@ public class VehicleSelector {
         MODEL_TITLE.setOpacity(0);
         ENGINE_BOX.setOpacity(0);
         ENGINE_TITLE.setOpacity(0);
-        YEAR_SOURCE = VehicleBase.getYears();
+        YEAR_SOURCE = Gateway.getVehicleYears();
         for (Label label : YEAR_LABELS) {
             label.setStyle("");
             label.setText("");
@@ -187,12 +183,12 @@ public class VehicleSelector {
                 }
 
 
+                int saveFocusIndex = yearFocusIndex;
+                int saveSelectIndex = yearSelectIndex;
+                int saveStartIndex = yearDisplayStartIndex;
                 if (savedString.length() == 1) {
 
                     // Try down
-                    int saveFocusIndex = yearFocusIndex;
-                    int saveSelectIndex = yearSelectIndex;
-                    int saveStartIndex = yearDisplayStartIndex;
 
                     while (yearSelectIndex < YEAR_SOURCE.size()) {
                         if (YEAR_SOURCE.get(yearSelectIndex).charAt(2) == savedString.charAt(0)) {
@@ -230,9 +226,6 @@ public class VehicleSelector {
 
                 } else {
                     // Try down
-                    int saveFocusIndex = yearFocusIndex;
-                    int saveSelectIndex = yearSelectIndex;
-                    int saveStartIndex = yearDisplayStartIndex;
 
                     while (yearSelectIndex < YEAR_SOURCE.size()) {
                         if (YEAR_SOURCE.get(yearSelectIndex).substring(2, 4).equals(savedString)) {
@@ -466,7 +459,7 @@ public class VehicleSelector {
         switch (category) {
             case 0 -> {
                 category = 1;
-                MAKE_SOURCE = VehicleBase.getMakes(YEAR_SOURCE.get(yearSelectIndex));
+                MAKE_SOURCE = Gateway.getVehicleMakes(YEAR_SOURCE.get(yearSelectIndex));
                 makeDisplayStartIndex = 0;
                 makeFocusIndex = 0;
                 makeSelectIndex = 0;
@@ -482,7 +475,7 @@ public class VehicleSelector {
 
             case 1 -> {
                 category = 2;
-                MODEL_SOURCE = VehicleBase.getModels(
+                MODEL_SOURCE = Gateway.getVehicleModels(
                         YEAR_SOURCE.get(yearSelectIndex), MAKE_SOURCE.get(makeSelectIndex)
                 );
                 modelDisplayStartIndex = 0;
@@ -500,7 +493,7 @@ public class VehicleSelector {
 
             case 2 -> {
                 category = 3;
-                ENGINE_SOURCE = VehicleBase.getEngines(
+                ENGINE_SOURCE = Gateway.getVehicleEngines(
                         YEAR_SOURCE.get(yearSelectIndex),
                         MAKE_SOURCE.get(makeSelectIndex),
                         MODEL_SOURCE.get(modelSelectIndex)

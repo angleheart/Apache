@@ -1,6 +1,6 @@
 package Apache.objects;
 
-public class Part implements Transferable {
+public class Part implements Selectable {
 
     private final String lineCode;
     private final String partNumber;

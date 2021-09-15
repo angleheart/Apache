@@ -1,7 +1,7 @@
 package Apache.workstation.payments;
 
 import Apache.objects.Customer;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -13,7 +13,7 @@ import java.util.List;
 
 class PaymentSelectionBox {
 
-    private static List<Transferable> selectables;
+    private static List<Selectable> selectables;
     private static Label[] labels;
     private static int selectableDisplayStartIndex;
     private static int selectableIndex;
@@ -33,7 +33,7 @@ class PaymentSelectionBox {
             labels[index] = (Label) nodes.get(index);
     }
 
-    static void performCustomerRequest(List<Transferable> customers) {
+    static void performCustomerRequest(List<Selectable> customers) {
         clearLabels();
         selectables = customers;
         focusIndex = 0;

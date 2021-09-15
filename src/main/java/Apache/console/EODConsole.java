@@ -2,15 +2,14 @@ package Apache.console;
 
 import Apache.config.Config;
 import Apache.database.EODBase;
-import Apache.database.InvoiceBase;
 import Apache.database.PaymentBase;
 import Apache.console.eod.EODReport;
+import Apache.http.Gateway;
 import Apache.util.PDFGenerator;
 import Apache.util.PrintUtility;
 import Apache.objects.Invoice;
 import Apache.objects.Payment;
-import Apache.objects.Release;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -36,102 +35,102 @@ public class EODConsole extends Console {
         input = input.toUpperCase(Locale.ROOT);
         switch (input) {
             case "BALANCE" -> {
-                List<Transferable> openReleases = EODBase.getAllOpenReleases();
-                if (openReleases == null) {
-                    Console.printError("A Apache.database error occurred");
-                    return true;
-                }
-
-                double netCashSales = 0;
-                double netCheckSales = 0;
-                double netPlasticSales = 0;
-                double cashPayments = 0;
-                double checkPayments = 0;
-                double plasticPayments = 0;
-
-                for (Transferable releaseSelectable : openReleases) {
-                    Release release = (Release) releaseSelectable;
-                    switch (release.getType()) {
-
-                        case INVOICE -> {
-                            switch (release.getReleaseCode()) {
-                                case CASH -> netCashSales += release.getReleaseTotal();
-                                case CHECK -> netCheckSales += release.getReleaseTotal();
-                                case PLASTIC -> netPlasticSales += release.getReleaseTotal();
-                            }
-                        }
-
-                        case PAYMENT -> {
-                            switch (release.getReleaseCode()) {
-                                case CASH -> cashPayments += release.getReleaseTotal();
-                                case CHECK -> checkPayments += release.getReleaseTotal();
-                                case PLASTIC -> plasticPayments += release.getReleaseTotal();
-                            }
-                        }
-                    }
-                }
-                String netBalance =
-                        cleanDouble(
-                                netCashSales +
-                                        netCheckSales +
-                                        netPlasticSales +
-                                        cashPayments +
-                                        checkPayments +
-                                        plasticPayments,
-                                2
-                        );
-                System.out.println("-----Cash Balance-----");
-                System.out.println("Net Cash Sales:\t\t" + cleanDouble(netCashSales, 2));
-                System.out.println("Net Check Sales:\t" + cleanDouble(netCheckSales, 2));
-                System.out.println("Net Plastic Sales:\t" + cleanDouble(netPlasticSales, 2));
-                System.out.println("Total Cash Invoices:\t" + COLOR_GREEN +
-                        cleanDouble(netCashSales + netPlasticSales + netCheckSales, 2) + COLOR_RESET);
-
-                System.out.println();
-                System.out.println("Cash Payments:\t\t" + cleanDouble(cashPayments, 2));
-                System.out.println("Check Payments:\t\t" + cleanDouble(checkPayments, 2));
-                System.out.println("Plastic Payments:\t" + cleanDouble(plasticPayments, 2));
-                System.out.println("Total Payments:\t\t" + COLOR_GREEN +
-                        cleanDouble(cashPayments + plasticPayments + checkPayments, 2) + COLOR_RESET);
-                System.out.println();
-                System.out.println("Expected Balance:\t" + COLOR_GREEN + netBalance + COLOR_RESET);
-                System.out.print("Your Balance:\t\t");
-                String total = scanner.nextLine();
-                System.out.println("----------------------");
-                if (isExitCommand(total))
-                    return true;
-                try {
-                    double totalDouble = Double.parseDouble(cleanDouble(Double.parseDouble(total), 2));
-
-                    if (totalDouble >= Double.parseDouble(netBalance)) {
-                        double abs = (totalDouble - Double.parseDouble(netBalance));
-                        if(abs <= 5)
-                            System.out.print(COLOR_GREEN);
-                        else if(abs <= 10)
-                            System.out.print(COLOR_YELLOW);
-                        else
-                            System.out.print(COLOR_RED);
-
-                        System.out.println("OVER " +
-                                cleanDouble(abs, 2) +
-                                COLOR_RESET);
-                    } else if (totalDouble < Double.parseDouble(netBalance)) {
-                        double abs = ((totalDouble - Double.parseDouble(netBalance)) * -1);
-                        if(abs <= 5)
-                            System.out.print(COLOR_GREEN);
-                        else if(abs <= 10)
-                            System.out.print(COLOR_YELLOW);
-                        else
-                            System.out.print(COLOR_RED);
-                        System.out.println("SHORT " +
-                                cleanDouble(abs, 2) +
-                                COLOR_RESET);
-                    }
-                    System.out.println("----------------------");
-
-                } catch (Exception e) {
-                    printError("Invalid input");
-                }
+//                List<Selectable> openReleases = EODBase.getAllOpenReleases();
+//                if (openReleases == null) {
+//                    Console.printError("A Apache.database error occurred");
+//                    return true;
+//                }
+//
+//                double netCashSales = 0;
+//                double netCheckSales = 0;
+//                double netPlasticSales = 0;
+//                double cashPayments = 0;
+//                double checkPayments = 0;
+//                double plasticPayments = 0;
+//
+//                for (Selectable releaseSelectable : openReleases) {
+//                    Release release = (Release) releaseSelectable;
+//                    switch (release.getType()) {
+//
+//                        case INVOICE -> {
+//                            switch (release.getReleaseCode()) {
+//                                case CASH -> netCashSales += release.getReleaseTotal();
+//                                case CHECK -> netCheckSales += release.getReleaseTotal();
+//                                case PLASTIC -> netPlasticSales += release.getReleaseTotal();
+//                            }
+//                        }
+//
+//                        case PAYMENT -> {
+//                            switch (release.getReleaseCode()) {
+//                                case CASH -> cashPayments += release.getReleaseTotal();
+//                                case CHECK -> checkPayments += release.getReleaseTotal();
+//                                case PLASTIC -> plasticPayments += release.getReleaseTotal();
+//                            }
+//                        }
+//                    }
+//                }
+//                String netBalance =
+//                        cleanDouble(
+//                                netCashSales +
+//                                        netCheckSales +
+//                                        netPlasticSales +
+//                                        cashPayments +
+//                                        checkPayments +
+//                                        plasticPayments,
+//                                2
+//                        );
+//                System.out.println("-----Cash Balance-----");
+//                System.out.println("Net Cash Sales:\t\t" + cleanDouble(netCashSales, 2));
+//                System.out.println("Net Check Sales:\t" + cleanDouble(netCheckSales, 2));
+//                System.out.println("Net Plastic Sales:\t" + cleanDouble(netPlasticSales, 2));
+//                System.out.println("Total Cash Invoices:\t" + COLOR_GREEN +
+//                        cleanDouble(netCashSales + netPlasticSales + netCheckSales, 2) + COLOR_RESET);
+//
+//                System.out.println();
+//                System.out.println("Cash Payments:\t\t" + cleanDouble(cashPayments, 2));
+//                System.out.println("Check Payments:\t\t" + cleanDouble(checkPayments, 2));
+//                System.out.println("Plastic Payments:\t" + cleanDouble(plasticPayments, 2));
+//                System.out.println("Total Payments:\t\t" + COLOR_GREEN +
+//                        cleanDouble(cashPayments + plasticPayments + checkPayments, 2) + COLOR_RESET);
+//                System.out.println();
+//                System.out.println("Expected Balance:\t" + COLOR_GREEN + netBalance + COLOR_RESET);
+//                System.out.print("Your Balance:\t\t");
+//                String total = scanner.nextLine();
+//                System.out.println("----------------------");
+//                if (isExitCommand(total))
+//                    return true;
+//                try {
+//                    double totalDouble = Double.parseDouble(cleanDouble(Double.parseDouble(total), 2));
+//
+//                    if (totalDouble >= Double.parseDouble(netBalance)) {
+//                        double abs = (totalDouble - Double.parseDouble(netBalance));
+//                        if(abs <= 5)
+//                            System.out.print(COLOR_GREEN);
+//                        else if(abs <= 10)
+//                            System.out.print(COLOR_YELLOW);
+//                        else
+//                            System.out.print(COLOR_RED);
+//
+//                        System.out.println("OVER " +
+//                                cleanDouble(abs, 2) +
+//                                COLOR_RESET);
+//                    } else if (totalDouble < Double.parseDouble(netBalance)) {
+//                        double abs = ((totalDouble - Double.parseDouble(netBalance)) * -1);
+//                        if(abs <= 5)
+//                            System.out.print(COLOR_GREEN);
+//                        else if(abs <= 10)
+//                            System.out.print(COLOR_YELLOW);
+//                        else
+//                            System.out.print(COLOR_RED);
+//                        System.out.println("SHORT " +
+//                                cleanDouble(abs, 2) +
+//                                COLOR_RESET);
+//                    }
+//                    System.out.println("----------------------");
+//
+//                } catch (Exception e) {
+//                    printError("Invalid input");
+//                }
                 return true;
             }
 
@@ -176,12 +175,12 @@ public class EODConsole extends Console {
                 }
 
                 System.out.println("Collecting all open invoices...");
-                List<Transferable> openInvoicesAsTransferable = InvoiceBase.getAllOpenInvoices();
+                List<Invoice> openInvoicesAsSelectable = Gateway.getOpenInvoices();
                 System.out.println("Collecting all open payments...");
-                List<Transferable> openPaymentsAsSelectable = PaymentBase.getAllOpenBasicPayments();
+                List<Selectable> openPaymentsAsSelectable = PaymentBase.getAllOpenBasicPayments();
                 Date cutOff = new Date();
 
-                if (openInvoicesAsTransferable == null) {
+                if (openInvoicesAsSelectable == null) {
                     Console.printError("Failed to collect open invoices");
                     return true;
                 }
@@ -191,7 +190,7 @@ public class EODConsole extends Console {
                     return true;
                 }
 
-                if (openInvoicesAsTransferable.size() == 0) {
+                if (openInvoicesAsSelectable.size() == 0) {
                     Console.printWarning("There are currently no open invoices.\n" +
                             "Are you sure you would like to generate a report?");
                     Console.printConfirmRequest();
@@ -203,13 +202,13 @@ public class EODConsole extends Console {
                 }
 
                 List<Invoice> openInvoices = new ArrayList<>();
-                for (Transferable invoice : openInvoicesAsTransferable)
+                for (Selectable invoice : openInvoicesAsSelectable)
                     openInvoices.add((Invoice) invoice);
                 Console.printSuccess("Collected all open invoices");
 
 
                 List<Payment> openPayments = new ArrayList<>();
-                for (Transferable payment : openPaymentsAsSelectable) {
+                for (Selectable payment : openPaymentsAsSelectable) {
                     openPayments.add((Payment) payment);
                 }
                 Console.printSuccess("Collected all open payments");

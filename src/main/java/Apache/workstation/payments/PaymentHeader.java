@@ -4,9 +4,7 @@ import Apache.config.Config;
 import Apache.http.Gateway;
 import Apache.objects.Customer;
 import Apache.database.CustomerBase;
-import Apache.database.InvoiceBase;
 import Apache.objects.Invoice;
-import Apache.objects.Transferable;
 import Apache.workstation.SceneController;
 import Apache.util.InputVerifier;
 import Apache.util.TextFieldModifier;
@@ -15,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static Apache.util.General.cleanDouble;
@@ -282,7 +279,7 @@ public class PaymentHeader {
     }
 
     private static void afterCustomerSelected() {
-        invoicesToDisplay = InvoiceBase.getPayableInvoices(customer);
+        invoicesToDisplay = Gateway.getPayableInvoices(customer.getNumber());
 
         if (invoicesToDisplay == null) {
             CUSTOMER_FIELD.clear();

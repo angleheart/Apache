@@ -3,7 +3,7 @@ package Apache.console;
 import Apache.objects.Customer;
 import Apache.objects.ReceivableReport;
 import Apache.database.CustomerBase;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 
 import java.util.List;
 import java.util.Locale;
@@ -41,10 +41,10 @@ public class CustomersConsole extends Console {
                 String name = "";
                 if (args.length > 1)
                     name = args[1];
-                List<Transferable> customers = CustomerBase.getCustomersByName(name);
+                List<Selectable> customers = CustomerBase.getCustomersByName(name);
                 if (customers.size() == 0)
                     Console.printError("No results");
-                for (Transferable customer : customers)
+                for (Selectable customer : customers)
                     System.out.println(customer.getSelectableName());
                 return true;
             }

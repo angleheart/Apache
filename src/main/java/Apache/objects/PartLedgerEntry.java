@@ -5,7 +5,7 @@ import java.util.Date;
 
 import static Apache.util.General.cleanDouble;
 
-public class PartLedgerEntry implements Transferable {
+public class PartLedgerEntry implements Selectable {
 
     private final int invoiceNumber;
     private final long time;

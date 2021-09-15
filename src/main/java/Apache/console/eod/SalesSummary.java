@@ -1,7 +1,6 @@
 package Apache.console.eod;
 
 import Apache.objects.Invoice;
-import Apache.objects.ReleaseCode;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class SalesSummary {
             if(invoice.getCustomer().getNumber().equalsIgnoreCase("1001"))
                 netInterStore += invoice.getTotals().getSubTotal();
 
-            if(invoice.getReleaseCode() == ReleaseCode.CHARGE)
+            if(invoice.getReleaseCode() == 31)
                 netCharge += invoice.getTotals().getGrandTotal();
             else
                 netCash += invoice.getTotals().getGrandTotal();

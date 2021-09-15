@@ -1,11 +1,5 @@
 package Apache.workstation.pos;
 
-import Apache.config.Config;
-import Apache.database.CounterPersonBase;
-import Apache.database.InventoryBase;
-import Apache.database.InvoiceBase;
-import Apache.database.SequenceBase;
-import Apache.invoicer.Invoicer;
 import Apache.objects.*;
 import Apache.http.Gateway;
 
@@ -52,7 +46,7 @@ public class ActiveSequence {
         SHIP_TO = sequence.getShipTo();
         TRANS_CODE = sequence.getTransCode();
         CUSTOMER = sequence.getCustomer();
-        COUNTER_PERSON = CounterPersonBase.getCounterPersonByNumber(Integer.toString(sequence.getCounterPerson().getNumber()));
+        COUNTER_PERSON = sequence.getCounterPerson();
         FREIGHT_TOTAL = sequence.getFreightTotal();
         for (SequenceLine sequenceLine : sequence.getSequenceLines())
             LINES.put(sequenceLine.getIndexKey(), sequenceLine);
@@ -65,37 +59,18 @@ public class ActiveSequence {
 
     static void hold(String saveName) {
         SAVE_NAME = saveName;
-        if (SequenceBase.holdSequence(getSequenceInstance())) {
-            startNew();
-        } else {
-            Error.send("Failed to hold sequence");
-            LineBody.reFocus();
-        }
+        Gateway.holdSequence(getSequenceInstance());
+        startNew();
     }
 
     static void kill() {
-        SequenceBase.killSequence(SAVE_NAME);
+        Gateway.killSequence(getSequenceInstance());
         startNew();
     }
 
     public static void release(int code) {
-        long l;
-        l = System.currentTimeMillis();
         Sequence sequence = getSequenceInstance();
-        if (!SAVE_NAME.equals(""))
-            SequenceBase.killSequence(SAVE_NAME);
-
-        if (Config.STAND_ALONE) {
-            Invoice invoice = sequence.releaseToInvoice(InvoiceBase.getInvoiceNumber(), code);
-            if (!InvoiceBase.storeInvoice(invoice) ||
-                    !InventoryBase.postInventoryUpdate(invoice) ||
-                    !Invoicer.printInvoice(invoice)
-            ) Error.send("Sorry, a database error occurred");
-        } else {
-            Gateway.postSequenceRelease(sequence, code);
-        }
-
-        System.out.println("Starting new elapsed " + (System.currentTimeMillis() - l) + "ms");
+        Gateway.postSequenceRelease(sequence, code);
         startNew();
     }
 

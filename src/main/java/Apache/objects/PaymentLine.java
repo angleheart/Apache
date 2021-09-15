@@ -1,13 +1,12 @@
 package Apache.objects;
 
-public class PerInvoicePayment implements Transferable {
-
+public class PaymentLine implements Selectable {
 
     private final int invoiceNumber;
     private final double amount;
     private final double originalBalance;
 
-    public PerInvoicePayment(
+    public PaymentLine(
             int invoiceNumber,
             double amount,
             double originalBalance

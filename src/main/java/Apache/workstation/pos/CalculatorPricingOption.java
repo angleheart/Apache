@@ -1,8 +1,8 @@
 package Apache.workstation.pos;
 
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 
-public class CalculatorPricingOption implements Transferable {
+public class CalculatorPricingOption implements Selectable {
 
     private final String multiplier;
     private final String price;

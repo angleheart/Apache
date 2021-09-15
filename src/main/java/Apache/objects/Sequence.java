@@ -3,9 +3,10 @@ package Apache.objects;
 import Apache.config.Config;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Sequence implements Transferable {
+public class Sequence implements Selectable {
 
     private final String saveName;
     private final Customer customer;
@@ -76,7 +77,7 @@ public class Sequence implements Transferable {
     }
 
     public Invoice releaseToInvoice(int invoiceNumber, int releaseCode) {
-        java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+        long time = new Date().getTime();
         if (invoiceNumber == -1)
             return null;
 
@@ -98,7 +99,7 @@ public class Sequence implements Transferable {
             invoiceLines.add(new InvoiceLine(
                     invoiceIndex,
                     invoiceNumber,
-                    date,
+                    time,
                     sequenceLines.get(i).getTransCode(),
                     sequenceLines.get(i).getQty(),
                     sequenceLines.get(i).getMfg(),
@@ -118,19 +119,19 @@ public class Sequence implements Transferable {
             balance = totals.getGrandTotal();
 
         return new Invoice(
-                invoiceNumber,
+                invoiceLines,
+                totals,
                 customer,
-                counterPerson.getNumber(),
-                po,
                 vehicleDescription,
                 shipTo,
-                date,
-                transCode,
-                releaseCode,
-                balance,
-                totals,
+                invoiceNumber,
                 0,
-                invoiceLines
+                time,
+                po,
+                counterPerson.getNumber(),
+                balance,
+                releaseCode,
+                transCode
         );
     }
 

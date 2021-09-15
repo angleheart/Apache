@@ -1,8 +1,8 @@
 package Apache.database;
 
 import Apache.objects.Payment;
-import Apache.objects.PerInvoicePayment;
-import Apache.objects.Transferable;
+import Apache.objects.PaymentLine;
+import Apache.objects.Selectable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,8 +17,8 @@ import static Apache.database.Connector.*;
 
 public class PaymentBase {
 
-    public static List<Transferable> getAllOpenBasicPayments() {
-        List<Transferable> payments = new ArrayList<>();
+    public static List<Selectable> getAllOpenBasicPayments() {
+        List<Selectable> payments = new ArrayList<>();
         try {
             Connection connection = getConnection();
             ResultSet paymentResults = connection.createStatement().executeQuery(
@@ -32,7 +32,7 @@ public class PaymentBase {
                                 paymentResults.getInt("ReleaseCode"),
                                 0,
                                 paymentResults.getString("DocumentDetail"),
-                                paymentResults.getDate("ReleaseTime")
+                                paymentResults.getTimestamp("ReleaseTime").getTime()
                         )
                 );
             }
@@ -58,7 +58,7 @@ public class PaymentBase {
                     resultSet.getInt("ReleaseCode"),
                     resultSet.getInt("AccountingPeriod"),
                     resultSet.getString("DocumentDetail"),
-                    new Date(resultSet.getTimestamp("ReleaseTime").getTime())
+                    resultSet.getTimestamp("ReleaseTime").getTime()
             );
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -97,13 +97,13 @@ public class PaymentBase {
                             securedKey + ", " +
                             "'" + payment.getCustomer().getNumber() + "', " +
                             payment.getAmount() + ", " +
-                            payment.getReleaseCodeInt() + ", " +
+                            payment.getReleaseCode() + ", " +
                             payment.getAccountingPeriod() + ", " +
                             "'" + payment.getDocumentDetail() + "', " +
                             "'" + sdf.format(new Date()) + "');"
             );
             for (
-                    PerInvoicePayment perInvoicePayment :
+                    PaymentLine perInvoicePayment :
                     payment.getPerInvoicePayments()
             ) {
                 statement.addBatch(

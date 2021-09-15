@@ -5,7 +5,7 @@ import Apache.database.PartBase;
 import Apache.database.SaleBase;
 import Apache.http.Gateway;
 import Apache.objects.Part;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 import Apache.util.InputVerifier;
 import Apache.util.TextFieldModifier;
 import javafx.collections.ObservableList;
@@ -92,7 +92,7 @@ public class LineBody {
         String mfg = targetLineGetMfg();
         String partNumber = targetLineGetPartNumber();
         String customerNumber = ActiveSequence.CUSTOMER.getNumber();
-        List<Transferable> pp = SaleBase.getPastPurchases(
+        List<Selectable> pp = SaleBase.getPastPurchases(
                 customerNumber,
                 mfg,
                 partNumber
@@ -456,114 +456,28 @@ public class LineBody {
                 case 4:
                     if (tryPartNumberSubmit(entry)) {
 
-                        if (Config.STAND_ALONE) {
-                            if (targetLineGetMfg().equals("*")) {
+                        String mfgRequest = targetLineGetMfg();
+                        String numberRequest = targetLineGetPartNumber();
+                        List<Part> parts = Gateway.queryParts(mfgRequest, numberRequest);
 
-                                List<Transferable> parts = PartBase.getPartsByNumber(targetLineGetPartNumber());
-
-                                if (parts.size() == 0) {
-                                    targetLineSetMfg(PartBase.inferMfg(entry));
-                                    targetLineSetDescription(
-                                            PartBase.inferDescription(targetLineGetMfg(), targetLineGetPartNumber())
-                                    );
-                                    approveRight();
-                                    return;
-                                }
-
-                                if (parts.size() == 1) {
-                                    Part part = (Part) parts.get(0);
-                                    targetLineSetMfg(part.getLineCode());
-                                    targetLineSetPartNumber(part.getPartNumber());
-                                    targetLineSetDescription(part.getDescription());
-                                    targetLineSetUnit(
-                                            cleanDouble(
-                                                    part.getCost() *
-                                                            ActiveSequence.CUSTOMER.getPriceMultiplier(),
-                                                    3)
-                                    );
-                                    targetLineSetAvl(
-                                            Integer.toString(PartBase.getAvailableQuantity(targetLineGetMfg(),
-                                                    targetLineGetPartNumber()))
-                                    );
-                                    targetLineSetGp(
-                                            PartBase.getGp(
-                                                    targetLineGetMfg(),
-                                                    targetLineGetPartNumber(),
-                                                    targetLineGetUnit()
-                                            )
-                                    );
-                                    FOCUS_COLUMN += 3;
-                                    reFocus();
-                                    return;
-                                }
-
-                                SelectionMenu.performRequest(SelectionMenuType.PART, parts);
-
-                            } else {
-                                Part part = PartBase.tryToCorrectPartNumber(targetLineGetMfg(),
-                                        targetLineGetPartNumber());
-                                if (part == null) {
-
-                                    targetLineSetDescription(
-                                            PartBase.inferDescription(targetLineGetMfg(),
-                                                    targetLineGetPartNumber())
-                                    );
-                                    approveRight();
-                                } else {
-                                    targetLineSetPartNumber(part.getPartNumber());
-                                    targetLineSetDescription(part.getDescription());
-                                    targetLineSetUnit(
-                                            cleanDouble(
-                                                    part.getCost() *
-                                                            ActiveSequence.CUSTOMER.getPriceMultiplier(),
-                                                    3)
-                                    );
-                                    targetLineSetAvl(
-                                            Integer.toString(PartBase.getAvailableQuantity(targetLineGetMfg(),
-                                                    targetLineGetPartNumber()))
-                                    );
-                                    targetLineSetGp(
-                                            PartBase.getGp(
-                                                    targetLineGetMfg(),
-                                                    targetLineGetPartNumber(),
-                                                    targetLineGetUnit()
-                                            )
-                                    );
-                                    FOCUS_COLUMN += 3;
-                                    reFocus();
-                                }
-                            }
-
-
+                        if (parts == null) {
+                            Error.send("A server error occurred");
+                            reFocus();
+                            return;
+                        } else if (parts.size() == 0) {
+                            if (mfgRequest.equals("*"))
+                                targetLineSetMfg("MIS");
+                            targetLineSetDescription("Part");
+                            approveRight();
+                            return;
+                        } else if (parts.size() == 1) {
+                            Part part = parts.get(0);
+                            applyPart(part);
+                            return;
                         } else {
-                            String mfgRequest = targetLineGetMfg();
-                            String numberRequest = targetLineGetPartNumber();
-                            List<Object> parts = Gateway.queryParts(mfgRequest, numberRequest);
-
-                            if(parts == null){
-                                Error.send("A server error occurred");
-                                reFocus();
-                                return;
-                            }
-                            else if(parts.size() == 0){
-                                if(mfgRequest.equals("*"))
-                                    targetLineSetMfg("MIS");
-                                targetLineSetDescription("Part");
-                                approveRight();
-                                return;
-                            } else if(parts.size() == 1){
-                                Part part = (Part)parts.get(0);
-                                applyPart(part);
-                                return;
-                            }else{
-                                List<Transferable> selectableParts = new ArrayList<>();
-                                for(Object o : parts)
-                                    selectableParts.add((Part) o);
-                                SelectionMenu.performRequest(SelectionMenuType.PART, selectableParts);
-                                return;
-                            }
+                            SelectionMenu.performRequest(SelectionMenuType.PART, new ArrayList<>(parts));
+                            return;
                         }
-                        return;
                     }
                     break;
                 case 5:

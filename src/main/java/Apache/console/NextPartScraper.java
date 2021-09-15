@@ -1,7 +1,7 @@
 package Apache.console;
 
-import Apache.database.VehicleBase;
 import Apache.objects.Vehicle;
+import Apache.server.database.VehicleDatabase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,8 +167,14 @@ class NextPartScraper {
         engine = engineElement.getText();
         engine = engine.replaceAll("[\n\r]", "");
         engine = engine.trim();
-        if (!engine.equalsIgnoreCase("I Don't Know"))
-            VehicleBase.addVehicle(new Vehicle(year, make, model, engine));
+
+        if (!engine.equalsIgnoreCase("I Don't Know")){
+            try(VehicleDatabase vehicleDatabase = new VehicleDatabase();){
+                vehicleDatabase.addVehicle(new Vehicle(year, make, model, engine));
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+            }
+        }
     }
 
     private static WebElement waitForVisibility(By by) throws TimeoutException {

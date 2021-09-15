@@ -1,85 +1,83 @@
 package Apache.server.database;
 
-import Apache.config.Config;
-import Apache.database.CustomerBase;
 import Apache.objects.*;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static Apache.database.Connector.getConnection;
 
 public class InvoiceDatabase extends Database {
 
-    private final CustomerDatabase customerDatabase;
-
-    public InvoiceDatabase(){
-        this.customerDatabase = new CustomerDatabase();
-    }
-
-    public List<Transferable> getOpenInvoices() throws SQLException {
+    public List<Invoice> getOpenInvoices() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT InvoiceNumber FROM Invoices WHERE AccountingPeriod = 0;"
         );
         ResultSet openNumbers = preparedStatement.executeQuery();
-        List<Transferable> toReturn = new ArrayList<>();
-        while(openNumbers.next())
+        List<Invoice> toReturn = new ArrayList<>();
+        while (openNumbers.next())
             toReturn.add(getInvoiceByNumber(openNumbers.getInt("InvoiceNumber")));
         return toReturn;
     }
 
-    public Transferable getInvoiceByNumber(int invoiceNumber) throws SQLException {
-        return getInvoiceByNumber(invoiceNumber, null);
+    public Invoice getInvoiceByNumber(int invoiceNumber, boolean withLines) throws SQLException {
+        return getInvoiceByNumber(invoiceNumber, null, withLines);
     }
 
-    public Transferable getInvoiceByNumber(int invoiceNumber, Customer customer) throws SQLException {
+    public Invoice getInvoiceByNumber(int invoiceNumber) throws SQLException {
+        return getInvoiceByNumber(invoiceNumber, null, true);
+    }
+
+    public Invoice getInvoiceByNumber(int invoiceNumber, Customer customer, boolean withLines) throws SQLException {
 
         PreparedStatement prepStatement = connection.prepareStatement(
                 "SELECT * FROM Invoices WHERE InvoiceNumber = ?;"
         );
         prepStatement.setInt(1, invoiceNumber);
         ResultSet invoiceResults = prepStatement.executeQuery();
-        if(!invoiceResults.next())
+        if (!invoiceResults.next())
             return null;
 
-        prepStatement = connection.prepareStatement(
-                "SELECT * FROM InvoiceLines WHERE InvoiceNumber = ? ORDER BY IndexKey;"
-        );
-        prepStatement.setInt(1, invoiceNumber);
-        ResultSet lineResults = prepStatement.executeQuery();
+        List<InvoiceLine> invoiceLines = new ArrayList<>();
 
-        List<TransferableInvoiceLine> transferableInvoiceLines = new ArrayList<>();
-
-        while (lineResults.next())
-            transferableInvoiceLines.add(
-                    new TransferableInvoiceLine(
-                            lineResults.getInt("IndexKey"),
-                            lineResults.getInt("InvoiceNumber"),
-                            lineResults.getTimestamp("ReleaseTime").getTime(),
-                            lineResults.getString("TransCode"),
-                            lineResults.getString("LineCode"),
-                            lineResults.getInt("Quantity"),
-                            lineResults.getString("PartNumber"),
-                            lineResults.getString("Description"),
-                            lineResults.getDouble("ListPrice"),
-                            lineResults.getDouble("Price"),
-                            lineResults.getDouble("CorePrice"),
-                            lineResults.getString("TaxCode")
-                    )
+        if (withLines) {
+            prepStatement = connection.prepareStatement(
+                    "SELECT * FROM InvoiceLines WHERE InvoiceNumber = ? ORDER BY IndexKey;"
             );
+            prepStatement.setInt(1, invoiceNumber);
+            ResultSet lineResults = prepStatement.executeQuery();
+            while (lineResults.next())
+                invoiceLines.add(
+                        new InvoiceLine(
+                                lineResults.getInt("IndexKey"),
+                                lineResults.getInt("InvoiceNumber"),
+                                lineResults.getTimestamp("ReleaseTime").getTime(),
+                                lineResults.getString("TransCode"),
+                                lineResults.getInt("Quantity"),
+                                lineResults.getString("LineCode"),
+                                lineResults.getString("PartNumber"),
+                                lineResults.getString("Description"),
+                                lineResults.getDouble("ListPrice"),
+                                lineResults.getDouble("Price"),
+                                lineResults.getDouble("CorePrice"),
+                                lineResults.getString("TaxCode")
+                        )
+                );
+        }
 
-        if(customer == null){
-            List<Customer> customers = customerDatabase.getCustomers(
-                    invoiceResults.getString("CustomerNumber")
-            );
+        if (customer == null) {
+            List<Customer> customers;
+            try (CustomerDatabase customerDatabase = new CustomerDatabase()) {
+                customers = customerDatabase.getCustomers(
+                        invoiceResults.getString("CustomerNumber"));
+            }
             customer = customers.get(0);
         }
 
-        return new TransferableInvoice(
-                transferableInvoiceLines,
+        return new Invoice(
+                invoiceLines,
                 new InvoiceTotals(
                         invoiceResults.getDouble("TaxableNet"),
                         invoiceResults.getDouble("NonTaxableNet"),
@@ -164,7 +162,7 @@ public class InvoiceDatabase extends Database {
                             "'" + invoice.getShipTo() + "', " +
                             "'" + sdf.format(invoice.getDate()) + "', " +
                             "'" + invoice.getTransCode() + "', " +
-                            invoice.getReleaseCodeInt() + ", " +
+                            invoice.getReleaseCode() + ", " +
                             invoice.getBalance() + ", " +
                             invoice.getTotals().getTaxableNet() + ", " +
                             invoice.getTotals().getNonTaxableNet() + ", " +
@@ -219,4 +217,45 @@ public class InvoiceDatabase extends Database {
             return false;
         }
     }
+
+    public List<Invoice> getPayableInvoices(String customerNumber) throws SQLException {
+        PreparedStatement prepStatement = connection.prepareStatement(
+                "SELECT InvoiceNumber FROM Invoices WHERE Balance != 0 AND AccountingPeriod != 0 " +
+                        "AND CustomerNumber = ? ORDER BY ReleaseTime;"
+        );
+        prepStatement.setString(1, customerNumber);
+        ResultSet resultSet = prepStatement.executeQuery();
+        List<Invoice> invoices = new ArrayList<>();
+        while (resultSet.next())
+            invoices.add(getInvoiceByNumber(resultSet.getInt("InvoiceNumber"), false));
+        return invoices;
+    }
+
+    public boolean voidInvoice(int invoiceNumber) {
+        try{
+            connection.setAutoCommit(false);
+            PreparedStatement prepInvoiceLineDelete = connection.prepareStatement(
+                    "DELETE FROM InvoiceLines WHERE InvoiceNumber = ?; "
+            );
+            PreparedStatement prepInvoiceDelete = connection.prepareStatement(
+                    "DELETE FROM Invoices WHERE InvoiceNumber = ?;"
+            );
+            prepInvoiceLineDelete.setInt(1, invoiceNumber);
+            prepInvoiceDelete.setInt(1, invoiceNumber);
+            prepInvoiceLineDelete.execute();
+            prepInvoiceDelete.execute();
+            connection.commit();
+            connection.setAutoCommit(true);
+            return true;
+        }catch(SQLException e){
+            try{
+                connection.rollback();
+                connection.setAutoCommit(true);
+            }catch(SQLException e2){
+                e2.printStackTrace();
+            }
+        }
+        return false;
+    }
+
 }

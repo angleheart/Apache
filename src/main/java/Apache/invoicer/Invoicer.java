@@ -52,7 +52,7 @@ public class Invoicer {
     static Label[] extendedBoxArray = new Label[12];
     static Label[] taxBoxArray = new Label[12];
 
-    private static Invoiceable INVOICE;
+    private static Invoice INVOICE;
 
     public static void setInvoice(Invoice invoice) {
         INVOICE = invoice;
@@ -130,7 +130,7 @@ public class Invoicer {
         return printInvoice(INVOICE);
     }
 
-    public static boolean printInvoice(Invoiceable invoice) {
+    public static boolean printInvoice(Invoice invoice) {
         INVOICE = invoice;
         try {
             resetConsistent();
@@ -186,7 +186,7 @@ public class Invoicer {
         int lineIndex = 0;
         pageNumberLabel.setText(Integer.toString(pageNumber));
 
-        for (InvoiceableLine line : INVOICE.getInvoiceableLines()) {
+        for (InvoiceLine line : INVOICE.getLines()) {
             if (lineIndex == 12) {
                 totalLabel.setText("CONTINUED");
                 printState("D" + INVOICE.getInvoiceNumber());
@@ -234,7 +234,7 @@ public class Invoicer {
 
         vehicleDescriptionLabel.setText(INVOICE.getVehicleDescription());
         shipToLabel.setText(INVOICE.getShipTo());
-        pageCountLabel.setText(Integer.toString(INVOICE.getInvoiceableLines().size() / 13 + 1));
+        pageCountLabel.setText(Integer.toString(INVOICE.getLines().size() / 13 + 1));
         invoiceNumberLabel.setText("D".concat(Integer.toString(INVOICE.getInvoiceNumber())));
         customerNumberLabel.setText(INVOICE.getCustomer().getNumber());
         dateLabel.setText(sdf.format(INVOICE.getDate()));
@@ -244,13 +244,19 @@ public class Invoicer {
         termsLabel.setText(getTermsByCode(INVOICE.getReleaseCode()));
     }
 
-    private static String getTermsByCode(ReleaseCode releaseCode) {
+    private static String getTermsByCode(int releaseCode) {
         String terms = "";
         if (INVOICE.getTransCode().equalsIgnoreCase("SAL"))
             terms += "SALE-";
         else if (INVOICE.getTransCode().equalsIgnoreCase("RET"))
             terms += "RETURN-";
-        return terms + releaseCode.name();
+        switch (releaseCode) {
+            case 31 -> terms += "CHARGE";
+            case 11 -> terms += "CASH";
+            case 12 -> terms += "CHECK";
+            case 13 -> terms += "PLASTIC";
+        }
+        return terms;
     }
 
 }

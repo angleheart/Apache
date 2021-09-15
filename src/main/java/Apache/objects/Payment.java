@@ -4,20 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Apache.objects.ReleaseType.PAYMENT;
+public class Payment implements Accountable, Selectable {
 
-public class Payment extends Release {
-
+    private final int releaseCode;
+    private final Customer customer;
+    private final long time;
+    private final int accountingPeriod;
     private final double amount;
     private final String documentDetail;
-    private final List<PerInvoicePayment> perInvoicePayments;
+    private final List<PaymentLine> perInvoicePayments;
 
     public Payment(
             double amount,
             int releaseCode,
             int accountingPeriod,
             String documentDetail,
-            Date date
+            Long time
     ){
         this(
                 null,
@@ -25,7 +27,7 @@ public class Payment extends Release {
                 releaseCode,
                 accountingPeriod,
                 documentDetail,
-                date,
+                time,
                 new ArrayList<>()
         );
     }
@@ -36,21 +38,33 @@ public class Payment extends Release {
             int releaseCode,
             int accountingPeriod,
             String documentDetail,
-            Date date,
-            List<PerInvoicePayment> perInvoicePayments
+            long time,
+            List<PaymentLine> paymentLines
     ) {
-        super(PAYMENT,
-                releaseCode,
-                date,
-                accountingPeriod,
-                amount,
-                customer
-        );
+        this.releaseCode = releaseCode;
+        this.time = time;
+        this.accountingPeriod = accountingPeriod;
+        this.customer = customer;
         this.amount = amount;
         this.documentDetail = documentDetail;
-        this.perInvoicePayments = perInvoicePayments;
+        this.perInvoicePayments = paymentLines;
     }
 
+    public int getReleaseCode() {
+        return releaseCode;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public int getAccountingPeriod() {
+        return accountingPeriod;
+    }
 
     public double getAmount() {
         return amount;
@@ -60,8 +74,12 @@ public class Payment extends Release {
         return documentDetail;
     }
 
-    public List<PerInvoicePayment> getPerInvoicePayments(){
+    public List<PaymentLine> getPerInvoicePayments() {
         return perInvoicePayments;
+    }
+
+    public Date getDate(){
+        return new Date(time);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package Apache.workstation.pos;
 
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 
-public class SpecialFunction implements Transferable {
+public class SpecialFunction implements Selectable {
 
     String name;
 

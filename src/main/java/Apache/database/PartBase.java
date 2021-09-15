@@ -1,7 +1,7 @@
 package Apache.database;
 
 import Apache.objects.Part;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -278,8 +278,8 @@ public class PartBase {
         }
     }
 
-    public static List<Transferable> getPartsByNumber(String partNumber) {
-        List<Transferable> parts = new ArrayList<>();
+    public static List<Selectable> getPartsByNumber(String partNumber) {
+        List<Selectable> parts = new ArrayList<>();
         try {
             partNumber = partNumber.replaceAll("/", "");
             partNumber = partNumber.replaceAll("-", "");

@@ -6,7 +6,7 @@ import Apache.console.eom.StatementLine;
 import Apache.objects.Customer;
 import Apache.database.CustomerBase;
 import Apache.database.StatementBase;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -19,7 +19,6 @@ public class EOMConsole extends Console {
     private final HelpMenu helpMenu;
     private final ExecutorService executor = Executors.newCachedThreadPool();
     private final List<CustomerStatement> customerStatements = new ArrayList<>();
-
 
     EOMConsole(Scanner scanner, String prompt) {
         super(scanner, prompt);
@@ -229,12 +228,12 @@ public class EOMConsole extends Console {
     }
 
     public void prepareAll() {
-        List<Transferable> customers = CustomerBase.getCustomersByName("");
+        List<Selectable> customers = CustomerBase.getCustomersByName("");
         if (customers == null) {
             printError("Failed to prepare all customer statements");
             return;
         }
-        for (Transferable customer : customers) {
+        for (Selectable customer : customers) {
             if (!prepare((Customer) customer)) {
                 printError("Failed to prepare all customer statements");
                 return;

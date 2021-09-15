@@ -1,11 +1,9 @@
 package Apache.console.eom;
 
 import Apache.objects.Customer;
-import Apache.database.InvoiceBase;
 import Apache.database.PaymentBase;
 import Apache.objects.Invoice;
 import Apache.objects.Payment;
-import Apache.objects.Release;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -43,91 +41,91 @@ public class StatementGenerator {
     }
 
     private static List<StatementLine> getPayByInvoiceLines(String customerNumber) {
-        List<StatementLine> toReturn = new ArrayList<>();
-        Map<Date, List<Release>> releases = new TreeMap<>();
-        List<Integer> invoiceNumbersToPost = getInvoiceNumbersToPost(customerNumber);
-        List<Integer> paymentNumbersToPost = getPaymentNumbersToPost(customerNumber);
-
-        if (invoiceNumbersToPost == null || paymentNumbersToPost == null)
-            return null;
-
-        for (Integer invNum : invoiceNumbersToPost) {
-            Invoice invoice = InvoiceBase.getInvoiceByNumberFromAll(invNum);
-            if (invoice == null)
-                return null;
-
-            List<Release> releaseList;
-            if (releases.containsKey(invoice.getDate()))
-                releaseList = releases.get(invoice.getDate());
-            else
-                releaseList = new ArrayList<>();
-
-            releaseList.add(invoice);
-            releases.put(invoice.getDate(), releaseList);
-        }
-        for (Integer payNum : paymentNumbersToPost) {
-            Payment payment = PaymentBase.getPaymentByID(payNum);
-            if (payment == null)
-                return null;
-            List<Release> releaseList;
-            if (releases.containsKey(payment.getDate()))
-                releaseList = releases.get(payment.getDate());
-            else
-                releaseList = new ArrayList<>();
-            releaseList.add(payment);
-            releases.put(payment.getDate(), releaseList);
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        int indexKey = 0;
-        double lastDue = 0;
-        Amounts amounts;
-
-        for (List<Release> releaseList : releases.values())
-            for (Release release : releaseList) {
-                switch (release.getType()) {
-                    case INVOICE -> {
-                        Invoice invoice = (Invoice) release;
-                        amounts = getPerInvoiceAmounts(invoice);
-                        if (amounts == null)
-                            return null;
-                        toReturn.add(
-                                new StatementLine(
-                                        indexKey,
-                                        new String[]{
-                                                sdf.format(invoice.getDate()),
-                                                "D-" + invoice.getInvoiceNumber(),
-                                                invoice.getPo(),
-                                                cleanDouble(amounts.og, 2),
-                                                cleanDouble(amounts.app, 2),
-                                                cleanDouble(amounts.bal, 2),
-                                                cleanDouble(amounts.bal + lastDue, 2)
-                                        }
-                                )
-                        );
-                        lastDue = amounts.bal + lastDue;
-                    }
-                    case PAYMENT -> {
-                        Payment payment = (Payment) release;
-                        toReturn.add(
-                                new StatementLine(
-                                        indexKey,
-                                        new String[]{
-                                                sdf.format(payment.getDate()),
-                                                "PAYMENT",
-                                                payment.getDocumentDetail(),
-                                                cleanDouble(payment.getAmount(), 2) + "-",
-                                                cleanDouble(payment.getAmount(), 2),
-                                                cleanDouble(0, 2),
-                                                cleanDouble(lastDue, 2)
-                                        }
-                                )
-                        );
-                    }
-                }
-                indexKey++;
-            }
-        return toReturn;
+//        List<StatementLine> toReturn = new ArrayList<>();
+//        Map<Date, List<Release>> releases = new TreeMap<>();
+//        List<Integer> invoiceNumbersToPost = getInvoiceNumbersToPost(customerNumber);
+//        List<Integer> paymentNumbersToPost = getPaymentNumbersToPost(customerNumber);
+//
+//        if (invoiceNumbersToPost == null || paymentNumbersToPost == null)
+//            return null;
+//
+//        for (Integer invNum : invoiceNumbersToPost) {
+//            Invoice invoice = InvoiceBase.getInvoiceByNumberFromAll(invNum);
+//            if (invoice == null)
+//                return null;
+//
+//            List<Release> releaseList;
+//            if (releases.containsKey(invoice.getDate()))
+//                releaseList = releases.get(invoice.getDate());
+//            else
+//                releaseList = new ArrayList<>();
+//
+//            releaseList.add(invoice);
+//            releases.put(invoice.getDate(), releaseList);
+//        }
+//        for (Integer payNum : paymentNumbersToPost) {
+//            Payment payment = PaymentBase.getPaymentByID(payNum);
+//            if (payment == null)
+//                return null;
+//            List<Release> releaseList;
+//            if (releases.containsKey(payment.getDate()))
+//                releaseList = releases.get(payment.getDate());
+//            else
+//                releaseList = new ArrayList<>();
+//            releaseList.add(payment);
+//            releases.put(payment.getDate(), releaseList);
+//        }
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+//        int indexKey = 0;
+//        double lastDue = 0;
+//        Amounts amounts;
+//
+//        for (List<Release> releaseList : releases.values())
+//            for (Release release : releaseList) {
+//                switch (release.getType()) {
+//                    case INVOICE -> {
+//                        Invoice invoice = (Invoice) release;
+//                        amounts = getPerInvoiceAmounts(invoice);
+//                        if (amounts == null)
+//                            return null;
+//                        toReturn.add(
+//                                new StatementLine(
+//                                        indexKey,
+//                                        new String[]{
+//                                                sdf.format(invoice.getDate()),
+//                                                "D-" + invoice.getInvoiceNumber(),
+//                                                invoice.getPo(),
+//                                                cleanDouble(amounts.og, 2),
+//                                                cleanDouble(amounts.app, 2),
+//                                                cleanDouble(amounts.bal, 2),
+//                                                cleanDouble(amounts.bal + lastDue, 2)
+//                                        }
+//                                )
+//                        );
+//                        lastDue = amounts.bal + lastDue;
+//                    }
+//                    case PAYMENT -> {
+//                        Payment payment = (Payment) release;
+//                        toReturn.add(
+//                                new StatementLine(
+//                                        indexKey,
+//                                        new String[]{
+//                                                sdf.format(payment.getDate()),
+//                                                "PAYMENT",
+//                                                payment.getDocumentDetail(),
+//                                                cleanDouble(payment.getAmount(), 2) + "-",
+//                                                cleanDouble(payment.getAmount(), 2),
+//                                                cleanDouble(0, 2),
+//                                                cleanDouble(lastDue, 2)
+//                                        }
+//                                )
+//                        );
+//                    }
+//                }
+//                indexKey++;
+//            }
+        return null;
     }
 
 

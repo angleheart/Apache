@@ -1,6 +1,7 @@
 package Apache.workstation.pos;
 
-import Apache.database.SequenceBase;
+import Apache.http.Gateway;
+import Apache.objects.Sequence;
 import Apache.workstation.inventory.InventoryManagerController;
 import Apache.workstation.SceneController;
 import Apache.workstation.vehicleselector.VehicleSelector;
@@ -11,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PointOfSale {
 
@@ -258,7 +262,12 @@ public class PointOfSale {
                 InputMenu.performRequest(InputMenuType.SHIP_TO);
                 break;
             case F7:
-                SelectionMenu.performRequest(SelectionMenuType.SEQUENCE, SequenceBase.getSequences());
+                List<Sequence> sequences = Gateway.getSequences();
+                if(sequences == null){
+                    Error.send("A server error occurred");
+                    return;
+                }
+                SelectionMenu.performRequest(SelectionMenuType.SEQUENCE, new ArrayList<>(sequences));
                 break;
             case F8:
                 LineBody.reportF8();

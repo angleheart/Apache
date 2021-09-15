@@ -1,11 +1,13 @@
 package Apache.console;
 
 import Apache.objects.CounterPerson;
-import Apache.database.CounterPersonBase;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
+import Apache.server.database.CounterPersonDatabase;
 import Apache.util.InputRefiner;
 import Apache.util.InputVerifier;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -27,13 +29,17 @@ public class CounterPersonConsole extends Console {
         input = input.toUpperCase(Locale.ROOT);
         switch (input) {
             case "LIST" -> {
-                List<Transferable> counterPeople = CounterPersonBase.getAllCounterPeople();
+                List<CounterPerson> counterPeople = new ArrayList<>();
+                try(CounterPersonDatabase counterPersonDatabase = new CounterPersonDatabase()){
+                    counterPeople.addAll(counterPersonDatabase.getCounterPeople("*"));
+                }catch(SQLException sqlException){
+                    sqlException.printStackTrace();
+                }
                 if (counterPeople.size() == 0) {
                     Console.printError("No results");
                     return true;
                 }
-
-                for (Transferable counterPerson : counterPeople) {
+                for (Selectable counterPerson : counterPeople) {
                     System.out.println(counterPerson.getSelectableName());
                 }
                 return true;
@@ -43,37 +49,44 @@ public class CounterPersonConsole extends Console {
                 System.out.print("Counter Person Number: ");
                 String num = scanner.nextLine().trim();
                 if (InputVerifier.verifyCounterPersonNumber(num)) {
-                    if (CounterPersonBase.getCounterPersonByNumber(num) == null) {
-                        System.out.print("Employee Name: ");
-                        String name = scanner.nextLine().trim();
-                        if (InputVerifier.verifyCounterPersonName(name)) {
-                            CounterPerson counterPerson = new CounterPerson(
-                                    Integer.parseInt(num),
-                                    InputRefiner.capitalizeFirstLetters(name)
-                            );
 
-                            System.out.println("----New CounterPerson----");
-                            System.out.println(Console.COLOR_PURPLE + counterPerson + Console.COLOR_RESET);
-                            System.out.println("-------------------------");
-                            System.out.print("Type \"Confirm\" to save this counterperson: ");
+                    try(CounterPersonDatabase counterPersonDatabase = new CounterPersonDatabase()){
+                        if (counterPersonDatabase.getCounterPeople(num).size() == 0) {
+                            System.out.print("Employee Name: ");
+                            String name = scanner.nextLine().trim();
+                            if (InputVerifier.verifyCounterPersonName(name)) {
+                                CounterPerson counterPerson = new CounterPerson(
+                                        Integer.parseInt(num),
+                                        InputRefiner.capitalizeFirstLetters(name)
+                                );
 
-                            String confirm = scanner.nextLine().trim();
-                            if(confirm.equalsIgnoreCase("CONFIRM")){
-                                if(CounterPersonBase.addCounterPerson(counterPerson))
-                                    Console.printSuccess("Saved counterperson to Apache.database");
-                                else
-                                    Console.printError("Failed to update Apache.database");
+                                System.out.println("----New CounterPerson----");
+                                System.out.println(Console.COLOR_PURPLE + counterPerson + Console.COLOR_RESET);
+                                System.out.println("-------------------------");
+                                System.out.print("Type \"Confirm\" to save this counterperson: ");
+
+                                String confirm = scanner.nextLine().trim();
+                                if(confirm.equalsIgnoreCase("CONFIRM")){
+                                    if(counterPersonDatabase.addCounterPerson(counterPerson))
+                                        Console.printSuccess("Saved counterperson to Apache.database");
+                                    else
+                                        Console.printError("Failed to update Apache.database");
+                                }else{
+                                    Console.printError("Counterperson not saved");
+                                }
                                 return true;
-                            }else{
-                                Console.printError("Counterperson not saved");
-                                return true;
+                            } else {
+                                Console.printError("Invalid employee name");
                             }
                         } else {
-                            Console.printError("Invalid employee name");
+                            Console.printError("Counter person already exists");
                         }
-                    } else {
-                        Console.printError("Counter person already exists");
+
+                    }catch (SQLException sqlException){
+                        sqlException.printStackTrace();
+                        return true;
                     }
+
                 } else {
                     Console.printError("Invalid counter person number");
                 }
@@ -84,25 +97,29 @@ public class CounterPersonConsole extends Console {
                 System.out.print("Enter counterperson number: ");
                 String counter = scanner.nextLine();
                 if(InputVerifier.verifyCounterPersonNumber(counter)){
-                    CounterPerson counterPerson = CounterPersonBase.getCounterPersonByNumber(counter);
-                    if(counterPerson == null){
-                        Console.printError("This counterperson does not exist");
-                        return true;
-                    }
-                    System.out.println("----DELETE COUNTERPERSON----");
-                    System.out.println(Console.COLOR_PURPLE + counterPerson + Console.COLOR_RESET);
-                    System.out.println("----------------------------");
-                    System.out.print("Type \"Confirm\" to delete this counterperson: ");
-                    String confirm = scanner.nextLine();
-                    if(confirm.equalsIgnoreCase("CONFIRM")){
 
-                        if(CounterPersonBase.deleteCounterPerson(Integer.parseInt(counter))){
-                            Console.printSuccess("Counterperson was deleted");
-                        }else{
-                            Console.printError("Failed to delete counterperson");
+                    try(CounterPersonDatabase counterPersonDatabase = new CounterPersonDatabase()){
+                        CounterPerson counterPerson = counterPersonDatabase.getCounterPeople(counter).get(0);
+                        if(counterPerson == null){
+                            Console.printError("This counterperson does not exist");
+                            return true;
                         }
-                    }else{
-                        Console.printError("Counterperson was not deleted");
+                        System.out.println("----DELETE COUNTERPERSON----");
+                        System.out.println(Console.COLOR_PURPLE + counterPerson + Console.COLOR_RESET);
+                        System.out.println("----------------------------");
+                        System.out.print("Type \"Confirm\" to delete this counterperson: ");
+                        String confirm = scanner.nextLine();
+                        if(confirm.equalsIgnoreCase("CONFIRM")){
+                            if(counterPersonDatabase.deleteCounterPerson(Integer.parseInt(counter))){
+                                Console.printSuccess("Counterperson was deleted");
+                            }else{
+                                Console.printError("Failed to delete counterperson");
+                            }
+                        }else{
+                            Console.printError("Counterperson was not deleted");
+                        }
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
                     }
                 }else{
                     Console.printError("Invalid counter person number");

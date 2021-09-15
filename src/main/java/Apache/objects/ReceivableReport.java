@@ -51,7 +51,6 @@ public class ReceivableReport {
         }
     }
 
-
     public String getCustomerNumber() {
         return customerNumber;
     }

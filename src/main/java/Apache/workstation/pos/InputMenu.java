@@ -1,20 +1,17 @@
 package Apache.workstation.pos;
 
 import Apache.config.Config;
-import Apache.database.InvoiceBase;
 import Apache.http.Gateway;
 import Apache.objects.Invoice;
 import Apache.invoicer.Invoicer;
 import Apache.util.General;
+import Apache.util.InputRefiner;
 import Apache.util.InputVerifier;
 import Apache.util.TextFieldModifier;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class InputMenu {
 
@@ -210,7 +207,7 @@ public class InputMenu {
                         Error.send("Invalid invoice number");
                     } else {
                         Error.clear();
-                        Invoice invoice = InvoiceBase.getInvoiceByNumberFromAll(invoiceNum);
+                        Invoice invoice = Gateway.getInvoiceByNumber(InputRefiner.cleanInvoiceNumber(invoiceNum));
                         if (invoice == null) {
                             Error.send("Invoice not found");
                         } else {
@@ -263,11 +260,9 @@ public class InputMenu {
                         INPUT_MENU_FIELD.requestFocus();
                     }
 
-                    Invoice invoice;
-                    if(Config.STAND_ALONE)
-                     invoice = InvoiceBase.getInvoiceByNumberFromAll(invoiceNumber);
-                    else
-                        invoice = (Invoice) Gateway.getInvoiceByNumber(invoiceNumber);
+                    Invoice invoice = Gateway.getInvoiceByNumber(
+                            InputRefiner.cleanInvoiceNumber(invoiceNumber)
+                    );
 
                     if (invoice == null) {
                         Error.send("Failed to open invoice");

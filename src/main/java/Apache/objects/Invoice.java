@@ -1,90 +1,66 @@
 package Apache.objects;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Apache.objects.ReleaseType.INVOICE;
 import static Apache.util.General.cleanDouble;
 
-public class Invoice extends Release implements Transferable, Invoiceable {
+public class Invoice implements Accountable, Selectable {
 
-    private final int invoiceNumber;
-    private final int counterPersonNumber;
-    private final String po;
+    private final List<InvoiceLine> lines;
+    private final InvoiceTotals totals;
+    private final Customer customer;
     private final String vehicleDescription;
     private final String shipTo;
-    private final String transCode;
+    private final int invoiceNumber;
+    private final int accountingPeriod;
+    private final long time;
+    private final String po;
+    private final int counterPersonNumber;
     private final double balance;
-    private final InvoiceTotals totals;
-    private final List<InvoiceLine> lines;
-
-
-    public Invoice(TransferableInvoice transferableInvoice) {
-        super(INVOICE,
-                transferableInvoice.getReleaseCodeInt(),
-                transferableInvoice.getDate(),
-                transferableInvoice.getAccountingPeriod(),
-                transferableInvoice.getTotals().getGrandTotal(),
-                transferableInvoice.getCustomer()
-                );
-        this.invoiceNumber = transferableInvoice.getInvoiceNumber();
-        this.counterPersonNumber = transferableInvoice.getCounterPersonNumber();
-        this.po = transferableInvoice.getPo();
-        this.vehicleDescription = transferableInvoice.getVehicleDescription();
-        this.shipTo = transferableInvoice.getShipTo();
-        this.transCode = transferableInvoice.getTransCode();
-        this.balance = transferableInvoice.getBalance();
-        this.totals = transferableInvoice.getTotals();
-        List<InvoiceLine> toSet = new ArrayList<>();
-        for(TransferableInvoiceLine transferLine : transferableInvoice.getLines())
-            toSet.add(new InvoiceLine(transferLine));
-        lines = toSet;
-    }
+    private final int releaseCode;
+    private final String transCode;
 
     public Invoice(
-            int invoiceNumber,
+            List<InvoiceLine> lines,
+            InvoiceTotals totals,
             Customer customer,
-            int counterPersonNumber,
-            String po,
             String vehicleDescription,
             String shipTo,
-            Date date,
-            String transCode,
-            int releaseCode,
-            double balance,
-            InvoiceTotals totals,
+            int invoiceNumber,
             int accountingPeriod,
-            List<InvoiceLine> lines
-    ) {
-        super(INVOICE,
-                releaseCode,
-                date,
-                accountingPeriod,
-                totals.getGrandTotal(),
-                customer
-        );
-        this.invoiceNumber = invoiceNumber;
-        this.counterPersonNumber = counterPersonNumber;
-        this.po = po;
+            long time,
+            String po,
+            int counterPersonNumber,
+            double balance,
+            int releaseCode,
+            String transCode
+    ){
+        this.lines = lines;
+        this.totals = totals;
+        this.customer = customer;
         this.vehicleDescription = vehicleDescription;
         this.shipTo = shipTo;
-        this.transCode = transCode;
+        this.invoiceNumber = invoiceNumber;
+        this.accountingPeriod = accountingPeriod;
+        this.time = time;
+        this.po = po;
+        this.counterPersonNumber = counterPersonNumber;
         this.balance = balance;
-        this.totals = totals;
-        this.lines = lines;
+        this.releaseCode = releaseCode;
+        this.transCode = transCode;
     }
 
-    public int getInvoiceNumber() {
-        return invoiceNumber;
+    public List<InvoiceLine> getLines() {
+        return lines;
     }
 
-    public int getCounterPersonNumber() {
-        return counterPersonNumber;
+    public InvoiceTotals getTotals() {
+        return totals;
     }
 
-    public String getPo() {
-        return po;
+    public Customer getCustomer() {
+        return customer;
     }
 
     public String getVehicleDescription() {
@@ -95,29 +71,45 @@ public class Invoice extends Release implements Transferable, Invoiceable {
         return shipTo;
     }
 
-    public String getTransCode() {
-        return transCode;
+    public int getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public InvoiceTotals getTotals() {
-        return totals;
+    public int getAccountingPeriod() {
+        return accountingPeriod;
     }
 
-    public List<InvoiceLine> getLines() {
-        return lines;
+    public long getTime() {
+        return time;
     }
 
-    public List<InvoiceableLine> getInvoiceableLines() {
-        return new ArrayList<>(lines);
+    public Date getDate(){
+        return new Date(time);
+    }
+
+    public String getPo() {
+        return po;
+    }
+
+    public int getCounterPersonNumber() {
+        return counterPersonNumber;
     }
 
     public double getBalance() {
         return balance;
     }
 
+    public int getReleaseCode() {
+        return releaseCode;
+    }
+
+    public String getTransCode() {
+        return transCode;
+    }
+
     @Override
     public String getSelectableName() {
-        String name = getCustomer().getName();
+        String name = customer.getName();
         if (name.length() > 15)
             name = name.substring(0, 15);
         else

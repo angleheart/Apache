@@ -1,6 +1,6 @@
 package Apache.workstation.pos;
 
-import Apache.database.InvoiceBase;
+import Apache.http.Gateway;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -21,7 +21,7 @@ public class SelectionMenu {
     private static TextField SELECTOR_LOCK;
 
     private static SelectionMenuType type;
-    private static List<Transferable> selectables;
+    private static List<Selectable> selectables;
 
     private static int selectableDisplayStartIndex;
     private static int selectableIndex;
@@ -33,7 +33,7 @@ public class SelectionMenu {
         costEntered = cost;
     }
 
-    private static final List<Transferable> specialFunctions = new ArrayList<>();
+    private static final List<Selectable> specialFunctions = new ArrayList<>();
 
     public static void initiate(
             Label titleLabel,
@@ -54,7 +54,7 @@ public class SelectionMenu {
         specialFunctions.add(new SpecialFunction("Review Open Invoices"));
     }
 
-    public static void performRequest(SelectionMenuType typeSet, List<Transferable> listSet) {
+    public static void performRequest(SelectionMenuType typeSet, List<Selectable> listSet) {
         type = typeSet;
 
         if (type == SelectionMenuType.INVOICE_VIEW_CALLBACK) {
@@ -243,9 +243,9 @@ public class SelectionMenu {
                     close();
                     InputMenu.performRequest(InputMenuType.INVOICE_VIEW);
                 } else if (selectables.get(selectableIndex).getSelectableName().contains("Review Open")) {
-                    List<Transferable> invoices = InvoiceBase.getAllOpenInvoices();
+                    List<Invoice> invoices = Gateway.getOpenInvoices();
                     if (invoices == null) {
-                        Error.send("A Apache.database error occurred");
+                        Error.send("A server error occurred");
                         cancel();
                         return;
                     }
@@ -255,7 +255,7 @@ public class SelectionMenu {
                         return;
                     }
 
-                    SelectionMenu.performRequest(SelectionMenuType.INVOICE_VIEW, invoices);
+                    SelectionMenu.performRequest(SelectionMenuType.INVOICE_VIEW, new ArrayList<>(invoices));
                 }
             }
             case INVOICE_VIEW, INVOICE_VIEW_CALLBACK -> {

@@ -50,5 +50,9 @@ public class InputRefiner {
         return String.valueOf(arr);
     }
 
+    public static int cleanInvoiceNumber(String invoiceNumber){
+        return invoiceNumber.startsWith("D") ? Integer.parseInt(invoiceNumber.substring(1)) :
+                Integer.parseInt(invoiceNumber);
+    }
 
 }

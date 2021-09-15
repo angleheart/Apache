@@ -2,7 +2,6 @@ package Apache.server.database;
 
 import Apache.objects.*;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +10,13 @@ import java.util.List;
 
 public class PartDatabase extends Database {
 
-    public List<Transferable> getParts(String mfg, String partNumber) throws SQLException {
+    public List<Selectable> getParts(String mfg, String partNumber) throws SQLException {
 
         partNumber = partNumber.replaceAll("/", "");
         partNumber = partNumber.replaceAll("-", "");
         partNumber = partNumber.replaceAll(" ", "");
 
-        List<Transferable> toReturn = new ArrayList<>();
+        List<Selectable> toReturn = new ArrayList<>();
         PreparedStatement prepStatement;
         ResultSet resultSet;
 

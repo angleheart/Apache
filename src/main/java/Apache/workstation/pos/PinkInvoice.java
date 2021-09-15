@@ -1,8 +1,6 @@
 package Apache.workstation.pos;
 
-import Apache.config.Config;
-import Apache.database.InventoryBase;
-import Apache.database.InvoiceBase;
+import Apache.http.Gateway;
 import Apache.objects.Invoice;
 import Apache.objects.InvoiceLine;
 import Apache.invoicer.Invoicer;
@@ -106,34 +104,34 @@ public class PinkInvoice {
 
         String addOn = " CLOSED";
         TERMS_LABEL.setTextFill(Color.RED);
-        if (invoice.isVoidable()) {
+        if (invoice.getAccountingPeriod() == 0) {
             TERMS_LABEL.setTextFill(Color.GREEN);
             addOn = " OPEN";
         }
 
         switch (invoice.getReleaseCode()) {
-            case CHARGE -> {
+            case 31 -> {
                 if (invoice.getTransCode().contains("SAL"))
                     TERMS_LABEL.setText("SALE-CHARGE");
                 else
                     TERMS_LABEL.setText("RETURN-CHARGE");
             }
 
-            case CASH -> {
+            case 11 -> {
                 if (invoice.getTransCode().contains("SAL"))
                     TERMS_LABEL.setText("SALE-CASH");
                 else
                     TERMS_LABEL.setText("RETURN-CASH");
             }
 
-            case PLASTIC -> {
+            case 13 -> {
                 if (invoice.getTransCode().contains("SAL"))
                     TERMS_LABEL.setText("SALE-CREDIT CARD");
                 else
                     TERMS_LABEL.setText("RET-CREDIT CARD");
             }
 
-            case CHECK -> {
+            case 12 -> {
                 if (invoice.getTransCode().contains("SAL"))
                     TERMS_LABEL.setText("SALE-CHECK");
                 else
@@ -232,27 +230,16 @@ public class PinkInvoice {
                     case "VOID" -> {
                         Error.clear();
 
-                        if (!loadedInvoice.isVoidable()) {
+                        if (loadedInvoice.getAccountingPeriod() != 0) {
                             Error.send("Invoice is not voidable");
                             INPUT_FIELD.clear();
                             INPUT_FIELD.requestFocus();
                             return;
                         }
-
-                        if (!InventoryBase.postInventoryUpdate(loadedInvoice, true)) {
-                            Error.send("Failed to roll back inventory");
-                            INPUT_FIELD.clear();
-                            INPUT_FIELD.requestFocus();
+                        if(!Gateway.voidInvoice(loadedInvoice.getInvoiceNumber())){
+                            Error.send("A server error occurred");
                             return;
                         }
-
-                        if (!InvoiceBase.forceDeleteInvoice(loadedInvoice.getInvoiceNumber())) {
-                            Error.send("Failed to void invoice");
-                            INPUT_FIELD.clear();
-                            INPUT_FIELD.requestFocus();
-                            return;
-                        }
-
                         Error.sendSuccess("Invoice voided");
                         endDisplay();
                     }
@@ -307,23 +294,23 @@ public class PinkInvoice {
 
     private static void tryReleaseUpdate(int code) {
         Error.clear();
-        if (!loadedInvoice.isVoidable()) {
+        if (loadedInvoice.getAccountingPeriod() != 0) {
             Error.send("Modification not allowed");
             INPUT_FIELD.clear();
             INPUT_FIELD.requestFocus();
             return;
         }
 
-        if (!InvoiceBase.setReleaseCode(loadedInvoice, code)) {
+        if (Gateway.setInvoiceReleaseCode(loadedInvoice.getInvoiceNumber(), code)) {
             Error.send("Failed to update invoice");
             INPUT_FIELD.clear();
             INPUT_FIELD.requestFocus();
             return;
         }
         Error.clear();
-        Invoice newInvoice = InvoiceBase.getInvoiceByNumberFromAll(loadedInvoice.getInvoiceNumber());
+        Invoice newInvoice = Gateway.getInvoiceByNumber(loadedInvoice.getInvoiceNumber());
         if (newInvoice == null) {
-            Error.send("Database error occured");
+            Error.send("Database error occurred");
             return;
         }
 

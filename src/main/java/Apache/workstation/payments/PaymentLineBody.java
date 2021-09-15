@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import Apache.objects.Customer;
 import Apache.objects.Invoice;
 import Apache.objects.Payment;
-import Apache.objects.PerInvoicePayment;
+import Apache.objects.PaymentLine;
 import Apache.workstation.SceneController;
 
 import java.text.SimpleDateFormat;
@@ -38,7 +38,7 @@ public class PaymentLineBody {
     private static int focusCol;
     private static int focusPage;
     private static List<Invoice> invoices;
-    private static Map<Integer, PerInvoicePayment> perInvoicePayments = new HashMap<>();
+    private static Map<Integer, PaymentLine> perInvoicePayments = new HashMap<>();
     private static Map<Integer, Page> pages = new HashMap<>();
 
     static class Page {
@@ -173,7 +173,7 @@ public class PaymentLineBody {
                 if (detail == null)
                     detail = "";
 
-                for (PerInvoicePayment pip : perInvoicePayments.values()) {
+                for (PaymentLine pip : perInvoicePayments.values()) {
                     total += pip.getAmount();
                 }
 
@@ -194,7 +194,7 @@ public class PaymentLineBody {
                         releaseCode,
                         0,
                         detail,
-                        new Date(),
+                        new Date().getTime(),
                         new ArrayList<>(perInvoicePayments.values())
                 );
 
@@ -323,7 +323,7 @@ public class PaymentLineBody {
 
             perInvoicePayments.put(
                     invoiceNum,
-                    new PerInvoicePayment(
+                    new PaymentLine(
                             invoiceNum,
                             roundedAmount,
                             originalBalance

@@ -1,5 +1,7 @@
 package Apache.console;
 
+import Apache.server.database.Database;
+
 import java.util.Scanner;
 
 public class ConsoleMain {

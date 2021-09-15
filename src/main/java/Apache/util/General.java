@@ -1,7 +1,7 @@
 package Apache.util;
 
 import Apache.workstation.pos.CalculatorPricingOption;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class General {
         return format.format(d);
     }
 
-    public static List<Transferable> getCalculatorOptions(double cost) {
+    public static List<Selectable> getCalculatorOptions(double cost) {
 
-        List<Transferable> pricingOptions = new ArrayList<>();
+        List<Selectable> pricingOptions = new ArrayList<>();
 
         pricingOptions.add(new CalculatorPricingOption(
                 "1.35",

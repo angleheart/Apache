@@ -1,13 +1,11 @@
 package Apache.workstation.pos;
 
 import Apache.config.Config;
-import Apache.http.Transfer;
 import Apache.objects.CounterPerson;
 import Apache.objects.Customer;
-import Apache.database.CounterPersonBase;
 import Apache.database.CustomerBase;
 import Apache.workstation.SceneController;
-import Apache.objects.Transferable;
+import Apache.objects.Selectable;
 import Apache.util.InputVerifier;
 import Apache.util.TextFieldModifier;
 import Apache.http.Gateway;
@@ -156,7 +154,7 @@ public class Header {
             if (Config.STAND_ALONE) {
                 Customer customer = CustomerBase.getCustomerByNumber(customerRequest);
                 if (customer == null) {
-                    List<Transferable> customerList = CustomerBase.getCustomersByName(customerRequest);
+                    List<Selectable> customerList = CustomerBase.getCustomersByName(customerRequest);
                     if (customerList.size() == 0) {
                         Error.send("No customers found");
                         Header.resetCustomerInfo();
@@ -223,38 +221,26 @@ public class Header {
         if (code == KeyCode.DOWN || code == KeyCode.ENTER) {
             CounterPerson counterPerson;
             String query = COUNTER_PERSON_NUMBER_FIELD.getText();
-            if(!InputVerifier.verifyCounterPersonNumber(query)){
+            if (!InputVerifier.verifyCounterPersonNumber(query)) {
                 Error.send("Invalid counter person number");
                 COUNTER_PERSON_NUMBER_FIELD.clear();
                 focusCounterPersonField();
                 return;
             }
 
-            if (Config.STAND_ALONE) {
-                counterPerson = CounterPersonBase.getCounterPersonByNumber(query);
-                if (counterPerson == null) {
-                    Error.send("Unknown counter person");
-                    COUNTER_PERSON_NUMBER_FIELD.clear();
-                    focusCounterPersonField();
-                    return;
-                }
-            } else {
-                List<Object> counterPeople = Gateway.queryCounterPeople(query);
-                if(counterPeople == null){
-                    Error.send("A server error occurred");
-                    COUNTER_PERSON_NUMBER_FIELD.clear();
-                    focusCounterPersonField();
-                    return;
-                }else if(counterPeople.size() < 1){
-                    Error.send("Unknown counter person");
-                    COUNTER_PERSON_NUMBER_FIELD.clear();
-                    focusCounterPersonField();
-                    return;
-                }else{
-                    counterPerson = (CounterPerson) counterPeople.get(0);
-                }
+            List<CounterPerson> counterPeople = Gateway.queryCounterPeople(query);
+            if (counterPeople == null) {
+                Error.send("A server error occurred");
+                COUNTER_PERSON_NUMBER_FIELD.clear();
+                focusCounterPersonField();
+                return;
+            } else if (counterPeople.size() < 1) {
+                Error.send("Unknown counter person");
+                COUNTER_PERSON_NUMBER_FIELD.clear();
+                focusCounterPersonField();
+                return;
             }
-
+            counterPerson = counterPeople.get(0);
             ActiveSequence.COUNTER_PERSON = counterPerson;
             loadCounterPerson();
             Error.clear();
